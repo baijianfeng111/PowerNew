@@ -1,0 +1,163 @@
+﻿@using PowerNew.Bll
+@model PowerNew.Model.bjf_articleinfo
+
+@{
+    ViewBag.Title = "编辑文章";
+}
+<div class="container">
+    <div class="row" style="margin-top: 20px;">
+        <div class="col-lg-6">
+            <span style="font-size: 20px;margin-left: 5%"><i class="glyphicon glyphicon-plus"></i>@ViewBag.Title</span>
+        </div>
+        <div class="col-lg-6" style="">
+            <button class="btn btn-info" data-loading-text="正在保存..." style="margin-left: 20px;" id="btnsave"><i class="glyphicon glyphicon-floppy-disk"></i>保存</button>
+            <a class="btn btn-info" href="@Url.Action("Index")"><i class="glyphicon glyphicon-export"></i>返回</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-md-8 col-lg-12" style="margin-top: 20px;">
+            <form id="form1" class="form-horizontal" method="POST" novalidate="novalidate" action="@Url.Action("SubmitEdit")">
+                <input name="ID" value="@Model.id" type="hidden" />
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="">文章类型：</label>
+                    <div class="col-sm-5 input-group">
+                        @Html.DropDownList("parentid", SelectListCenter.GetArticleTypeOneSelectList(Model.parentid), new { @class = "form-control", @id = "parentid" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for=""><span class="f_req"></span>文章系列：</label>
+                    <div class="col-sm-5 input-group">
+                        @Html.DropDownList("typeid", SelectListCenter.GetArticleTypeTwoSelectList(Model.parentid, Model.typeid), new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="title">文章标题：</label>
+                    <div class="col-sm-5" style="margin-top: 5px;">
+                        <input type="text" class="form-control" id="title" name="title" value="@Model.title">
+                    </div>
+                </div>
+                <div id="imagefile" class="form-group">
+                    <label class="col-sm-2 control-label" for="">主题图片：</label>
+                    <div class="col-sm-7">
+                        <input id="txt_imagefile" class="file-loading" type="file" accept=".jpg,.png" max="1" multiple="multiple">
+                        <br>
+                        <input id="ImageUrl" type="text" style="visibility: hidden;margin-top: -50px;" name="ImageUrl" value="" class="form-control">
+                    </div>
+                    <div class="col-sm-2">
+                        <span class="help-block form-control-static f_req">限jpg、png格式,每张小于100K</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="">新闻内容：</label>
+                    <div class="col-sm-5" style="margin-top: 5px;">
+                        <script id="editor" name="Editor" type="text/plain" style="width: 800px;height:500px">
+                            @Html.Raw(Model.content)
+                        </script>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@Styles.Render("~/css/fileinput")
+
+@Scripts.Render("~/js/fileinput")
+<script type="text/javascript">
+    UE.getEditor('editor');
+
+    //-------图片
+    var strimg1 = "@Model.photourl" != null ? "<img src='@Model.photourl' style='width: 250px; height: 220px;' />" : null;
+    $('#txt_imagefile').fileinput({
+        language: 'zh',
+        uploadUrl: '@Url.Action("UploadFiles", "File", new {area = ""})',
+        allowedFileExtensions: ['png', 'jpg'],
+        maxFilePreviewSize: 100,
+        uploadAsync: true,
+        initialPreview: [
+            strimg1
+        ],
+        maxFileCount: 1
+    });
+
+    //----------------------图片
+    $('.fileinput-remove-button', '#ImageUrl').click(function () {
+        $("#ImageUrl").val('');
+    });
+    //删除图标回调
+    $('#txt_imagefile').on('fileclear', function (event, data) {
+        $("#ImageUrl").val('');
+    });
+
+    //异步请求回调获取返回值
+    $('#txt_imagefile').on("fileuploaded", function (event, data) {
+        var temp = "";
+        var a = $("#ImageUrl").val();
+        $.each(data.response, function (index, item) {
+            temp += item.url;
+        });
+        a == "" ? a += temp : a += "," + temp;
+        $("#ImageUrl").val(a);
+    });
+
+
+    $("#btnsave").click(function () {
+        $("#form1").validate({
+            rules: {
+                //parentid: {
+                //    isparentid: true
+                //},
+                //typeid: {
+                //    istypeid: true
+                //},
+                title: {
+                    required: true
+                },
+                ImageUrl: {
+                    required: true
+                }
+            },
+
+            messages: {
+                //parentid: {
+                //    parentid: "文章类别不能为空"
+                //},
+                //typeid: {
+                //    typeid: true
+                //},
+                title: {
+                    required: "文章系列不能为空."
+                },
+                ImageUrl: {
+                    required: "请上传主题图片."
+                }
+            },
+            errorClass: "error",
+            success: 'valid',
+            unhighlight: function (element, errorClass, validClass) { //验证通过
+                $(element).tooltip('destroy').removeClass(errorClass);
+            },
+            errorPlacement: function (error, element) {
+                if ($(element).next("div").hasClass("tooltip")) {
+                    $(element).attr("data-placement", "right");
+                    $(element).attr("data-original-title", $(error).text()).tooltip("show");
+                } else {
+                    $(element).attr("title", $(error).text()).tooltip("show");
+                }
+            },
+            submitHandler: function () {
+                $("#btnsave").button('loading');
+                $("form:first").ajaxSubmit(function (result) {
+                    if (result.state == 0) {
+                        alert(result.msg);
+                        $("#btnsave").button('reset');
+                        window.location.href = "@Url.Action("Index")";
+                    } else { alert(result.msg); $("#btnsave").button('reset'); }
+                });
+            }
+        });
+        var a = $("#form1").serialize();
+        alert(a);
+        $("form:first").submit();
+    });
+</script>

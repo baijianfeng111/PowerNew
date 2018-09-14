@@ -1,0 +1,73 @@
+﻿@using System.Configuration
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Aaron's blog-我在这里等风也等你</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta name="description" itemprop="description" content="Aaron的个人博客,博主喜欢编程,希望能和大家成为好朋友 >.<" />
+    <link rel="alternate icon" type="image/png" href="/Content/Image/icon.jpg">
+    <link rel="stylesheet" href="/Content/assets/css/amazeui.min.css" />
+    <link rel="stylesheet" href="~/Content/assets/css/Blog.css" />
+    <link rel="stylesheet" href="~/Content/Blog/Base.css" />
+    <script src="/Content/assets/js/jquery.min.js"></script>
+    <script src="/Content/assets/js/amazeui.min.js"></script>
+    <script src="~/Scripts/Blog/Base.js"></script>
+    <script src="~/Content/layer/layer.js"></script>
+    <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+    <script src="/Content/assets/js/amazeui.ie8polyfill.min.js"></script>
+
+</head>
+<body style="background-color:aliceblue ;">
+    @Html.Partial("_BlogHeader")
+    <div class="am-g am-g-fixed blog-g-fixed">
+        @Html.Partial("_BlogMsg")
+        <div id="ContentBodyDiv" style="border-radius: 20px 20px 20px 20px; margin-top: 10px; background-color: aliceblue" class="am-u-md-8 ">
+            @RenderBody()
+        </div>
+        @{
+            Html.RenderAction("GetRightView", "Blog");
+        }
+    </div>
+    @Html.Partial("_BlogMiddle")
+    @Html.Partial("_BlogFooter")
+    <!--效果-->
+    @*<div id="xiaomaiDiv" class="xiaomai">
+            <img style="width: 50px" src="~/Content/Image/xiaomai.png" />
+            <script>
+                $(function () {
+                    $("#xiaomaiDiv").mouseover(function () {
+                        $(this).animate({ bottom: "1.8px" }, 700);
+                    });
+                    $("#xiaomaiDiv").mouseout(function () {
+                        $(this).animate({ bottom: "0px" }, 100);
+                    });
+                });
+            </script>
+        </div>*@
+    <!--效果-->
+    <!--回到顶部-->
+    <div id="back-to-top" class="am-hide-sm-only" data-am-smooth-scroll="{speed: 1000}">
+        <script>
+            $(function () {
+                $(window).scroll(function () {
+                    //滚动条到达页面一半的时候
+                    if ($(document).scrollTop() >= ($(document).height() - $(window).height()) / 2) {
+                        //改变height属性 触发css的transition的效果
+                        $("#back-to-top").css("height", "900px"); //图片高度就是900px 小了显示不全
+                    }
+                    //滚动条不到页面一半的时候
+                    if ($(document).scrollTop() <= ($(document).height() - $(window).height()) / 2) {
+                        //改变height属性 触发css的transition的效果
+                        $("#back-to-top").css("height", "-900px");
+                    }
+                });
+            });
+        </script>
+    </div>
+</body>
+</html>

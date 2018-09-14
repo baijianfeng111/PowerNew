@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+  <appSettings>
+    <add key="应用程序名称" value="防伪追溯系统"/>
+    <add key="登录页说明" value="致力于构建简单、专业、高效的营销管理系统。"/>
+    <add key="Logo标题" value="防伪追溯系统"/>
+    <add key="公司名称" value="北京助力软件有限公司"/>
+    <add key="公司网址" value="http://www.entfly.com"/>
+    <add key="系统缩写" value="weisu"/>
+    <add key="后台Logo样式" value="float: left;padding-left: 70px;padding-right: 70px;padding-top: 5px;"/>
+  </appSettings>
+</configuration>

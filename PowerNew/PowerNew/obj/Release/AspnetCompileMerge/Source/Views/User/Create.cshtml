@@ -1,0 +1,210 @@
+﻿@using PowerNew.Common
+@model PowerNew.Model.bjf_user
+@{
+    var title = Model.id == 0 ? "添加用户" : "修改用户";
+}
+<div class="container">
+    <div class="row">
+        <div class="form-group" style="margin-top: 20px;">
+            <span style="font-size: 20px;margin-left: 5%"><i class="glyphicon glyphicon-plus"></i>@title</span>
+            <a class="btn btn-info" id="btnsave" data-loading-text="正在保存..." style="margin-left: 40%"><i class="glyphicon glyphicon-floppy-disk"></i>保存</a>
+            <a class="btn btn-info" href="@Url.Action("Index")"><i class="glyphicon glyphicon-export"></i>返回</a>
+        </div>
+    </div>
+
+    <hr class="hr1">
+    <div class="row">
+        <div class="col-xs-12 col-md-8 col-lg-12" style="margin-top: 10px;">
+            <form id="form1" class="form-horizontal" method="POST" action="@Url.Action("SubmitSave")" novalidate="novalidate">
+                <input type="hidden" name="id" value="@Model.id" />
+                <div class="form-group">
+                    <label class="col-sm-2 control-label"><span class="f_req">*</span>用户名：</label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" value="@Model.username" name="username">
+                    </div>
+                    <div class="col-sm-4">
+                        <span class="help-block form-control-static"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label"><span class="f_req">*</span>登录名：</label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" value="@Model.loginname" name="loginname">
+                    </div>
+                    <div class="col-sm-4">
+                        <span class="help-block form-control-static"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label"><span class="f_req">*</span>密码：</label>
+                    <div class="col-sm-5">
+                        <input type="password" class="form-control" value="@(EncryAndDecryptHelper.Decryption(Model.password))" name="password">
+                    </div>
+                    <div class="col-sm-4">
+                        <span class="help-block form-control-static"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label"><span class="f_req">*</span>手机号：</label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" value="@(EncryAndDecryptHelper.Decryption(Model.mobile))" name="mobile">
+                    </div>
+                    <div class="col-sm-4">
+                        <span class="help-block form-control-static"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label"><span class="f_req"></span>邮箱：</label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" value="@Model.email" name="email">
+                    </div>
+                    <div class="col-sm-4">
+                        <span class="help-block form-control-static"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label"><span class="f_req"></span>身份证号：</label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" value="@(EncryAndDecryptHelper.Decryption(Model.idcard))" name="idcard">
+                    </div>
+                    <div class="col-sm-4">
+                        <span class="help-block form-control-static"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label"><span class="f_req">*</span>是否是超级管理员：</label>
+                    <div class="col-sm-5">
+                        @{
+                            var newlist = new List<SelectListItem> {
+                                new SelectListItem {Text = "是", Value = "0"},
+                                new SelectListItem {Text = "否", Value = "1"}
+                            };
+                            foreach (var item in newlist)
+                            {
+                                if ((Model.id > 0 && Model.isadmin == Convert.ToInt32(item.Value)) || Convert.ToInt32(item.Value) == 0)
+                                {
+                                    <label class="control-label">
+                                        <input type="radio" checked="checked" name="isadmin" value="@item.Value" />
+                                        <span>@item.Text</span>
+                                    </label>
+                                }
+                                else
+                                {
+                                    <label class="control-label">
+                                        <input type="radio" name="isadmin" value="@item.Value" />
+                                        <span>@item.Text</span>
+                                    </label>
+                                }
+
+                            }
+
+                        }
+                    </div>
+                    <div class="col-sm-4">
+                        <span class="help-block form-control-static"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label"><span class="f_req"></span>备注：</label>
+                    <div class="col-sm-5">
+                        <textarea class="form-control" id="comment" name="comment">@Model.comment</textarea>
+                    </div>
+                    <div class="col-sm-4">
+                        <span class="help-block form-control-static"></span>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+
+    $("#btnsave").click(function () {
+        $("#form1").validate({
+            rules: {
+                username: {
+                    required: true
+                },
+                loginname: {
+                    required: true
+                },
+                password: {
+                    required: true
+                },
+                mobile: {
+                    required: true,
+                    ismobile:true
+                },
+                email: {
+                    isemail:true
+                },
+                idcard: {
+                    isidcard:true
+                }
+            },
+
+            messages: {
+                username: {
+                    required: "用户名不能为空."
+                },
+                loginname: {
+                    required: "登录名不能为空."
+                },
+                password: {
+                    required: "密码不能为空."
+                },
+                mobile: {
+                    required: "手机号不能为空.",
+                    ismobile:true
+                },
+                email: {
+                    isemail: true
+                },
+                idcard: {
+                    isidcard: true
+                }
+            },
+            errorClass: "error",
+            success: 'valid',
+            unhighlight: function (element, errorClass, validClass) { //验证通过
+                $(element).tooltip('destroy').removeClass(errorClass);
+            },
+            errorPlacement: function (error, element) {
+                if ($(element).next("div").hasClass("tooltip")) {
+                    $(element).attr("data-placement", "right");
+                    $(element).attr("data-original-title", $(error).text()).tooltip("show");
+                } else {
+                    $(element).attr("title", $(error).text()).tooltip("show");
+                }
+            },
+            submitHandler: function () {
+                $("#btnsave").button('loading');
+                $("form:first").ajaxSubmit(function (result) {
+                    if (result.state == 0) {
+                        alert(result.msg);
+                        $("#btnsave").button('reset');
+                        window.location.href = "@Url.Action("Index")";
+                    } else { alert(result.msg); $("#btnsave").button('reset'); }
+                });
+            }
+        });
+
+        jQuery.validator.addMethod("isemail", function (value, element) {
+            var tel = /^([0-9A-Za-z\-_\.]+)@@([0-9a-z]+\.[a-z]{2,3}(\.[a-z]{2})?)$/g;
+            return this.optional(element) || (tel.test(value));
+        }, "请正确填写您的邮箱地址");
+        jQuery.validator.addMethod("isidcard", function (value, element) {
+            var tel = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+            return this.optional(element) || (tel.test(value));
+        }, "请正确填写您的身份证号码");
+        jQuery.validator.addMethod("ismobile", function (value, element) {
+            var tel = /^1[0-9]{10}$/;
+            return this.optional(element) || (tel.test(value));
+        }, "请正确填写您的手机号");
+
+        $("form:first").submit();
+
+    });
+</script>

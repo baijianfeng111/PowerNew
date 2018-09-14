@@ -1,0 +1,87 @@
+﻿@using PowerNew.Common
+@model PagerResult<PowerNew.Model.bjf_user>
+@{
+    ViewBag.Title = "Index";
+    var index = Model.Index;
+    var param = ViewBag.param;
+}
+<div class="" style="width:100%;margin:0 auto">
+    <div class="form-group">
+        <div><h3 class="col-sm-2" style="margin-top: 5px;"><i class="glyphicon glyphicon-tag"></i>用户管理</h3></div>
+        <div class="form-group" style="margin-top: 10px;">
+            <a class="btn btn-info" href="@Url.Action("Index")"><i class="glyphicon glyphicon-refresh"></i>刷新</a>
+            <a class="btn btn-info" href="@Url.Action("Create")"><i class="glyphicon glyphicon-plus"></i>添加</a>
+        </div>
+        <hr>
+    </div>
+    <form id="formQuery" method="get" action="@Url.Action("Index")">
+        <div class="form-group">
+            <label class="col-sm-2 control-label" style="line-height: 43px">登录名称：</label>
+            <div class="col-sm-2">
+                <input type="text" class="form-control" value="@param.loginname" name="loginname">
+            </div>
+        </div>
+        <button class="btn btn-success" type="submit"><i class="glyphicon glyphicon-search"></i>查询</button>
+        <button class="btn btn-warning" type="button" id="btnclear"><i class="glyphicon glyphicon-trash"></i>清空</button>
+    </form>
+    <table id="table-area" class="table table-striped table-bordered table-hover">
+        <tr>
+            <th>序号</th>
+            <th>用户名</th>
+            <th>登录名</th>
+            <th>身份证</th>
+            <th>电子邮箱</th>
+            <th>手机号</th>
+            <th>最后更新时间</th>
+            <th>操作</th>
+        </tr>
+        @foreach (PowerNew.Model.bjf_user item in Model.DataList)
+        {
+            index++;
+            <tr>
+                <td>@index</td>
+                <td>@item.username</td>
+                <td>@item.loginname</td>
+                <td>@(EncryAndDecryptHelper.Decryption(item.idcard))</td>
+                <td>@item.email</td>
+                <td>@(EncryAndDecryptHelper.Decryption(item.mobile))</td>
+                <td>@item.updatetime</td>
+                <td>
+                    <a class="btn btn-link btn-xs" href="@Url.Action("ChooseRole", new {userid = item.id})">选择角色</a>
+                    <a class="btn btn-link btn-xs" href="@Url.Action("Edit", new {id = item.id})">修改</a>
+                    <a class="btn btn-link btn-xs" onclick="IsDelete(@item.id)">删除</a>
+
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+<div class="form-group" style="width: 60%; float: right">
+    <div class="col-sm-8" style="text-align:right">@Html.Raw(Model.PagerHtml())</div>
+    <span class="col-sm-2" style="line-height: 81.5px">共 @Model.Total 条</span>
+</div>
+<script type="text/javascript">
+
+    function IsDelete(id) {
+        if (!confirm("是否要删除该条信息？")) {
+            return;
+        }
+        var url = "@Url.Action("Delete")";
+        $.post(url, { id: id }, function (result) {
+            if (result.state == 0) {
+                alert(result.msg);
+                window.location.href = "@Url.Action("Index")";
+            } else {
+                alert(result.msg);
+            }
+        });
+    }
+
+    $(function () {
+        $("#btnclear").click(function () {
+            $("#formQuery :input").each(function () {
+                $(this).val("");
+            });
+        });
+    });
+</script>

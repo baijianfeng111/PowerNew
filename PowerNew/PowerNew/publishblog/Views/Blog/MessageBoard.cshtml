@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "MessageBoard";
+    Layout = "~/Views/Shared/_BlogLayout.cshtml";
+}
+<div>
+    <article class="am-article">
+        <div class="am-article-hd">
+            <h1 class="am-article-title">留言板</h1>
+            <p class="am-article-meta">
+                发布日期:2016-8-18
+            </p>
+        </div>
+        <div class="am-article-bd">
+            <img src="~/Content/Image/6.jpg" />
+            <p style="font-size: 15px" class="am-kai">
+                Hello<br />
+                有什么话要对我说吗？<br />
+                这里是你畅所欲言的地方<br />
+                可以咨询<br />
+                可以交流<br />
+                可以感叹<br />
+                可以发飙<br />
+                但不可以订外卖!
+            </p>
+        </div>
+    </article>
+    <hr />
+    @{
+        Html.RenderAction("LeaveMsg", "Blog");
+    }
+</div>

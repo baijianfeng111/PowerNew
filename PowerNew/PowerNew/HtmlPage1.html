@@ -1,0 +1,80 @@
+﻿<html>
+
+<head>
+    <title> USB电话语音盒声卡版ActiveX Control 测试 </title>
+</head>
+
+
+<body>
+<object id="testOcx"
+        classid="clsid:8B257356-138B-44FD-9625-9A0E39A9855A"
+        codebase="http://wx01.sc2005.cn:10086/calltel/NewmineKHT.CAB#version=1,0,0,9">   
+</object>
+    <input type="button" onclick="offhook()" value="摘机" style="width:80px;height:30px;" />
+    <input id="edit1" type="text" value="8085" style="width:140px;height:30px;line-height:30px;" />
+    <input type="button" onclick="dial()" value="拨号" style="width:80px;height:30px; " />
+    <input type="button" onclick="hangup()" value="挂机" style="width:80px;height:30px; " />
+    <input type="button" onclick="volup()" value="音量+" style="width:80px;height:30px; " />
+    <input type="button" onclick="voldown()" value="音量-" style="width:80px;height:30px; " />
+    <input type="button" onclick="GetImconing()" value="来电" style="width:80px;height:30px; " />
+    <input type="button" onclick="GetPhoneKey()" value="按键" style="width:80px;height:30px; " />
+    <input type="button" onclick="StartRecordFile()" value="开始录音" style="width:80px;height:30px; " />
+    <input type="button" onclick="StopRecordFile()" value="停止录音" style="width:80px;height:30px; " />
+    <input type="button" onclick="IsOffhook()" value="状态" style="width:80px;height:30px; " />
+    <script src="Content/js/jquery.min.js"></script>
+    <script language="javascript">
+
+        function hangup() {
+            testOcx.HangUp();
+        }
+
+        function offhook() {
+            testOcx.AutoRecord = 0;
+            testOcx.OffHook();
+        }
+
+        function dial() {
+            testOcx.RestoreSndVolume = 0;
+            var number = document.getElementById("edit1").value;
+            alert(number);
+            testOcx.Dial("17310597173");
+        }
+
+
+        function volup() {
+            testOcx.VolUp();
+        }
+
+        function voldown() {
+            testOcx.VolDown();
+        }
+        function GetImconing() {
+            var result = testOcx.GetIncoming();
+            alert(result);
+        }
+
+        function GetPhoneKey() {
+            var result = testOcx.GetPhoneKey();
+            alert(result);
+        }
+
+        function StartRecordFile() {
+            testOcx.StartRecord("d:\\test.wav");
+        }
+
+        function StopRecordFile() {
+            testOcx.StopRecord();
+        }
+        function IsOffhook() {
+            if (testOcx.IsOffhook == 1) {
+                alert('摘机');
+            } else {
+                alert('挂机');
+            }
+            alert(testOcx.IsOffhook);
+        }
+
+    </script>
+
+</body>
+</html>

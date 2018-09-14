@@ -1,0 +1,33 @@
+﻿@model PowerNew.Model.bjf_articleinfo
+@{
+    Layout = "~/Views/Shared/_BlogLayout.cshtml";
+}
+<div>
+    <article class="am-article">
+        <div class="am-article-hd">
+            <h1 class="am-article-title">@Model.title</h1>
+            <p class="am-article-meta">
+                <span class="am-icon-clock-o"> 发表于</span>&nbsp;@Model.createtime
+                @*• under <a href="javascript:void(0);">@Model.title</a>*@
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="am-icon-user">作者</span>&nbsp;<a href="javascript:void(0);">@ViewBag.UserName</a>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="am-icon-eye">@Model.readcount<span>次围观</span></span>
+            </p>
+        </div>
+        <div class="am-article-bd">
+            <div class="am-article-lead"> @Html.Raw(Model.content)</div>
+        </div>
+    </article>
+    <div class="am-text-truncate" style="width: 100%; padding: 10px;color:red">----------正文到此结束----------</div>
+    <hr>
+    @{
+        Html.RenderAction("LeaveMsg", "Blog");
+    }
+</div>
+
+<link href="~/Scripts/kindeditor/plugins/code/prettify.css" rel="stylesheet" />
+<script src="~/Scripts/kindeditor/plugins/code/prettify.js"></script>
+<script>
+    $(function () {
+        prettyPrint();
+    });
+</script>

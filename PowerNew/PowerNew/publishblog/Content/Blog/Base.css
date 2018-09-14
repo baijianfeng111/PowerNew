@@ -1,0 +1,22 @@
+﻿/*验证码图片样式*/
+#validateCodeImg {
+    height: 35px;
+}
+
+/*回到顶部*/
+#back-to-top {
+    position: fixed;
+    right: 48px;
+    top: 0px;
+    width: 70px;
+    height: -900px;
+    background: url('../../Content/Image/scroll.png');
+    -webkit-transition: all .6s ease-in-out;
+    transition: all .6s ease-in-out;
+}
+/*小埋*/
+.xiaomai {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+}

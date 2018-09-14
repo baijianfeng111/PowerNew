@@ -1,0 +1,259 @@
+﻿@*@{
+        Layout = null;
+    }
+
+    <!DOCTYPE html>
+
+    <html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>爬虫DEMO</title>
+    </head>
+    <body style="font-size: 16px; width: 100%; margin: 0 auto">
+        <div class="container">
+            <div class="row">
+                <div class="form-group" style="margin-top: 20px;">
+                    <input id="url" value="" class="control-label" />
+                    <a class="btn btn-info" href="javascript:void(0)" id="look"><i class="glyphicon glyphicon-plus"></i>获取数据</a>
+                </div>
+            </div>
+        </div>
+        <div id="showhtml" class="container">
+            @ViewBag.a
+        </div>
+        <script src="~/Content/js/jquery.min.js"></script>
+        <script type="text/javascript">
+            $(function () {
+
+                $("#look").click(function () {
+                    var urlAction = "@Url.Action("GetHttpSource")";
+                    var url = $("#url").val();
+                    $.post(urlAction, { url: url }, function (result) {
+                            //alert(result.data);
+                            $("#showhtml").html(result.data);
+                        });
+                });
+            });
+        </script>
+    </body>
+    </html>*@
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap.min.js"></script>
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=1.3"></script>
+</head>
+<body>
+    <div id="baidu_geo" class="container">
+        <div class="row" style="margin-top: 20%">
+            <div class="form-group">
+                <label class="control-label"><span id="showcode"></span><a style="margin-left: 25px" class="btn btn-success" id="btncode">点击获取激活码</a></label>
+            </div>
+            <div class="form-group">
+                <label class="control-label">ZIP包下载：<a class="btn btn-info" href="@Url.Action("DownZip")">点击下载</a></label>
+            </div>
+        </div>
+        <div class="row" style="margin-top: 20%">
+            <button class="btn btn-info" id="btnpb" data-loading-text="Loading">普通</button>
+            <button class="btn btn-info" id="btnzhai" data-loading-text="Loading">摘机</button>
+            <button class="btn btn-info" id="btngua" data-loading-text="Loading">挂机</button>
+            <button class="btn btn-info" id="btnda" data-loading-text="Loading">呼叫</button>
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(function () {
+
+            $("#btnpb").click(function () {
+                //$(this).button('loading');
+                var url = "@Url.Action("Pub")";
+                $.post(url,
+                    function (result) {
+                        if (result.state == 0) {
+                            alert(result.msg);
+                        } else {
+                            alert(result.msg);
+                        }
+                        //$(this).button('reset');
+                    });
+            });
+
+            $("#btnzhai").click(function () {
+                //$(this).button('loading');
+                var url = "@Url.Action("OffHook")";
+                $.post(url,
+                    function (result) {
+                        if (result.state == 0) {
+                            alert(result.msg);
+                        } else {
+                            alert(result.msg);
+                        }
+                        //$(this).button('reset');
+                    });
+            });
+
+            $("#btngua").click(function () {
+                //$(this).button('loading');
+                var url = "@Url.Action("HangUp")";
+                $.post(url,
+                    function (result) {
+                        if (result.state == 0) {
+                            alert(result.msg);
+                          
+                        } else {
+                            alert(result.msg);
+                        }
+                        //$(this).button('reset');
+                    });
+            });
+
+            $("#btnda").click(function () {
+                //$(this).button('loading');
+                var url = "@Url.Action("Dial")";
+                $.post(url,
+                    function (result) {
+                        if (result.state == 0) {
+                            alert(result.msg);
+                        } else {
+                            alert(result.msg);
+                        }
+                        //$(this).button('reset');
+                    });
+            });
+
+            $("#btncode").click(function () {
+                var url = "@Url.Action("ShowCode")";
+                $.post(url,
+                    function (result) {
+                        if (result.state == 0) {
+                            $("#showcode").html(result.msg);
+                            $("#btncode").addClass("disabled");
+                        } else {
+                            alert(result.msg);
+                        }
+                        //$(this).button('reset');
+                    });
+            });
+            //getLocation();
+            //// 百度地图API功能
+            //var locationManager = new BMap.Geolocation();
+            //var currentCity = "";
+            //var currentProvice = "";
+            //var currentStreet = "";
+            //locationManager.getCurrentPosition(
+            //    function (r) {
+            //        if (this.getStatus() == window.BMAP_STATUS_SUCCESS) {
+            //            var myGeo = new window.BMap.Geocoder();
+            //            myGeo.getLocation(r.point,
+            //                function (rs) {
+            //                    var addComp = rs.addressComponents;
+            //                    currentCity = addComp.city;
+            //                    currentProvice = addComp.province;
+            //                    currentStreet = addComp.street;
+            //                    //addComp.district;
+            //                    var currentLocation = currentProvice + " " + currentCity + " " + currentStreet;
+            //                    //$("#baidu_geo").html(currentLocation);
+            //                    alert(currentLocation);
+            //                }
+            //            );
+            //        }
+            //        else {
+            //            alert('获取位置失败');
+            //        }
+            //    });
+        });
+
+
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition1, showError);
+            } else {
+                alert("浏览器不支持地理定位。");
+            }
+        }
+
+
+        function showError(error) {
+            switch (error.code) {
+                case error.PERMISSION_DENIED:
+                    alert("定位失败,用户拒绝请求地理定位");
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    alert("定位失败,位置信息是不可用");
+                    break;
+                case error.TIMEOUT:
+                    alert("定位失败,请求获取用户位置超时");
+                    break;
+                case error.UNKNOWN_ERROR:
+                    alert("定位失败,定位系统失效");
+                    break;
+            }
+        }
+
+
+
+        function showPosition(position) {
+            var latlon = position.coords.latitude + ',' + position.coords.longitude;
+
+            //baidu
+            //var url = "<a href="http://api.map.baidu.com/geocoder/v2/?ak=C93b5178d7a8ebdb830b9b557abce78b&callback=renderReverse&location="+latlon+"&output=json&pois=0">http:////api.map.baidu.com/geocoder/v2/?ak=C93b5178d7a8ebdb830b9b557abce78b&callback=renderReverse&location="+latlon+"&output=json&pois=0</a>";
+
+            var url = "http://api.map.baidu.com/geocoder/v2/?ak=C93b5178d7a8ebdb830b9b557abce78b&callback=renderReverse&location=" + latlon + "&output=json&pois=0";
+            $.ajax({
+                type: "GET",
+                dataType: "jsonp",
+                url: url,
+                beforeSend: function () {
+                    $("#baidu_geo").html('正在定位...');
+                },
+                success: function (json) {
+                    if (json.status === 0) {
+                        $("#baidu_geo").html(json.result.formatted_address);
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    $("#baidu_geo").html(latlon + "地址位置获取失败");
+                }
+            });
+        }
+
+        function showPosition1(position) {
+            var latlon = position.coords.latitude + ',' + position.coords.longitude;
+
+            //google
+            var url = 'http://maps.google.cn/maps/api/geocode/json?latlng=' + latlon + '&language=CN';
+            $.ajax({
+                type: "GET",
+                url: url,
+                beforeSend: function () {
+                    $("#google_geo").html('正在定位...');
+                },
+                success: function (json) {
+                    if (json.status == 'OK') {
+                        var results = json.results;
+                        $.each(results, function (index, array) {
+                            if (index == 0) {
+                                $("#google_geo").html(array['formatted_address']);
+                            }
+                        });
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    $("#google_geo").html(latlon + "地址位置获取失败");
+                }
+            });
+        }
+
+    </script>
+</body>
+</html>

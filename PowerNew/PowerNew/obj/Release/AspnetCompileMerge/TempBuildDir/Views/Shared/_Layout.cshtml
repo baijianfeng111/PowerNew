@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    @*@using StackExchange.Profiling
+        @MiniProfiler.RenderIncludes()*@
+    <title>阿里云音乐后台-----Aaron</title>
+    <link rel="shortcut icon" type="image/x-icon" href="~/Image/favicon.ico.png" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
+    <link rel="alternate icon" type="image/png" href="/Image/ali123.png">
+    @Html.Partial("_PartHeader")     @*-----引入js和css*@
+</head>
+
+<body>
+    <div class="header">
+        @Html.Partial("_PartTop") @*-----顶部导航区*@
+    </div>
+
+    <div class="content">
+        <div class="form-group main">
+            @Html.Partial("_PartLeft") @*-----左边导航区*@
+            <div class="col-sm-10" style="height: 100%; max-height: 800px; background-color:ghostwhite; overflow: auto;overflow-x:hidden">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div style="text-align: center; background-color: lightblue;color: #008080">Aaron's Project</div>  @*-----底部*@
+    </div>
+</body>
+</html>

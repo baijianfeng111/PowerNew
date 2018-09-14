@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="Service1" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:6721/Service1.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:6721/Service1.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:6721/Service1.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/WcfService1" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IService1_GetData_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetData" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetDataUsingDataContract_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDataUsingDataContract" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetDataUsingDataContract_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDataUsingDataContractResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_OffHook_InputMessage">
+    <wsdl:part name="parameters" element="tns:OffHook" />
+  </wsdl:message>
+  <wsdl:message name="IService1_OffHook_OutputMessage">
+    <wsdl:part name="parameters" element="tns:OffHookResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_HangUp_InputMessage">
+    <wsdl:part name="parameters" element="tns:HangUp" />
+  </wsdl:message>
+  <wsdl:message name="IService1_HangUp_OutputMessage">
+    <wsdl:part name="parameters" element="tns:HangUpResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_Dial_InputMessage">
+    <wsdl:part name="parameters" element="tns:Dial" />
+  </wsdl:message>
+  <wsdl:message name="IService1_Dial_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DialResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_StartEarPhoneMode_InputMessage">
+    <wsdl:part name="parameters" element="tns:StartEarPhoneMode" />
+  </wsdl:message>
+  <wsdl:message name="IService1_StartEarPhoneMode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:StartEarPhoneModeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_StopEearPhoneMode_InputMessage">
+    <wsdl:part name="parameters" element="tns:StopEearPhoneMode" />
+  </wsdl:message>
+  <wsdl:message name="IService1_StopEearPhoneMode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:StopEearPhoneModeResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IService1">
+    <wsdl:operation name="GetData">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetData" message="tns:IService1_GetData_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetDataResponse" message="tns:IService1_GetData_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDataUsingDataContract">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetDataUsingDataContract" message="tns:IService1_GetDataUsingDataContract_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetDataUsingDataContractResponse" message="tns:IService1_GetDataUsingDataContract_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="OffHook">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/OffHook" message="tns:IService1_OffHook_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/OffHookResponse" message="tns:IService1_OffHook_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="HangUp">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/HangUp" message="tns:IService1_HangUp_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/HangUpResponse" message="tns:IService1_HangUp_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Dial">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/Dial" message="tns:IService1_Dial_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/DialResponse" message="tns:IService1_Dial_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="StartEarPhoneMode">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/StartEarPhoneMode" message="tns:IService1_StartEarPhoneMode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/StartEarPhoneModeResponse" message="tns:IService1_StartEarPhoneMode_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="StopEearPhoneMode">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/StopEearPhoneMode" message="tns:IService1_StopEearPhoneMode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/StopEearPhoneModeResponse" message="tns:IService1_StopEearPhoneMode_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IService1" type="tns:IService1">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetData">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDataUsingDataContract">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetDataUsingDataContract" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OffHook">
+      <soap:operation soapAction="http://tempuri.org/IService1/OffHook" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HangUp">
+      <soap:operation soapAction="http://tempuri.org/IService1/HangUp" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Dial">
+      <soap:operation soapAction="http://tempuri.org/IService1/Dial" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StartEarPhoneMode">
+      <soap:operation soapAction="http://tempuri.org/IService1/StartEarPhoneMode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StopEearPhoneMode">
+      <soap:operation soapAction="http://tempuri.org/IService1/StopEearPhoneMode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Service1">
+    <wsdl:port name="BasicHttpBinding_IService1" binding="tns:BasicHttpBinding_IService1">
+      <soap:address location="http://localhost:6721/Service1.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

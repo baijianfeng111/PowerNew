@@ -1,0 +1,5 @@
+G:\BJF文件集合\单元测试\PowerNew\Repository\bin\Debug\Repository.dll
+G:\BJF文件集合\单元测试\PowerNew\Repository\bin\Debug\Repository.pdb
+G:\BJF文件集合\单元测试\PowerNew\Repository\obj\Debug\Repository.dll
+G:\BJF文件集合\单元测试\PowerNew\Repository\obj\Debug\Repository.pdb
+G:\BJF文件集合\单元测试\PowerNew\Repository\obj\Debug\Repository.csprojResolveAssemblyReference.cache

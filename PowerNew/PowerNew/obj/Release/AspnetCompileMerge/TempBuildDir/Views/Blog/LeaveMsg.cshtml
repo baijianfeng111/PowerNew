@@ -1,0 +1,159 @@
+﻿@model List<PowerNew.Model.bjf_leavemessage>
+@{
+    Layout = null;
+}
+
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link href="~/Css/wangEditor-fullscreen-plugin.css" rel="stylesheet" />
+<link href="~/Css/zyd.comment.css" rel="stylesheet" />
+<article class="am-article">
+    <div class="am-u-md-12">
+        <div id="comment-place">
+            <div class="comment-post" id="comment-post">
+                <h3><i class="fa fa-commenting-o fa-fw"></i>留言</h3>
+                <div class="cancel-reply" id="cancel-reply" style="display: none;">
+                    <a href="javascript:void(0);" onclick="cancelreply(this)"><i class="fa fa-share"></i>取消回复</a>
+                </div>
+                <form class="form-horizontal" role="form" id="comment-form">
+                    <input type="hidden" name="pid" id="comment-pid" value="0" size="22" tabindex="1">
+                    <div id="editor" style="width: 100%;height: 150px;">
+                    </div>
+                    <div class="row" style="margin-top: 40px;">
+                        <div id="myAlert" class="alert alert-success col-sm-10" style="display: none;margin-left: 2%">
+                            <a href="#" class="close" data-dismiss="alert">&times;</a>
+                            <strong id="msgerror"></strong>
+                        </div>
+                        <label id="ermsg" style="display: block; color: red; margin-left: 2%"></label>
+                    </div>
+                    <a class="btn btn-info btn-block" style="width:20%" id="comment-form-btn" data-loading-text="提交中...">提交评论</a>
+                </form>
+            </div>
+        </div>
+        <!-- 评论 -->
+        <div class="commentList">
+            <h3><i class="fa fa-comments-o fa-fw"></i>最近<em>5</em>条留言~~~</h3>
+            <ul class="comment">
+                @if (Model.Count > 0)
+                {
+                    foreach (var item in Model)
+                    {
+                        <li>
+                            <div class="comment-body" id="comment-1">
+                                <div class="cheader">
+                                    <a target="_blank" href="https://github.com/zhangyd-c">
+                                        <img class="userImage" src="~/img/user/11.jpg">
+                                        <strong>@item.name</strong>
+                                    </a>
+                                    <div class="timer">
+                                        <i class="fa fa-clock-o fa-fw"></i>@item.createtime
+                                        <i class="fa fa-map-marker fa-fw"></i>@item.position
+                                    </div>
+                                </div>
+                                <div class="content">
+                                    <a href="#comment-5" class="comment-quote">@item.name</a>
+                                    @Html.Raw(item.message)<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/3c/pcmoren_wu_org.png" alt="[污]" data-w-e="1">
+                                </div>
+                                <div class="sign">
+                                    <i class="icons os-ipad"></i>PC <i class="sepa"></i>
+                                    <i class="icons browser-safari"></i>safari 15.0.0.12 <i class="sepa"></i>
+                                    <a href="#comment-1" class="comment-reply" onclick="showreply(1, this)"><i class="fa fa-reply fa-fw"></i>回复</a>
+                                </div>
+                            </div>
+                        </li>
+                    }
+                }
+
+
+            </ul>
+        </div>
+    </div>
+</article>
+<link href="~/Content/alertify.default.css" rel="stylesheet" />
+<script src="~/Content/js/alertify.js"></script>
+<script src="~/Scripts/bootstrap.js"></script>
+<script src="~/Js/leavemessage-master/wangEditor.min.js"></script>
+<script src="~/Js/leavemessage-master/xss.js"></script>
+<script src="~/Js/leavemessage-master/wangEditor-fullscreen-plugin.js"></script>
+<script src="~/Js/leavemessage-master/zyd.comment.js"></script>
+
+@*<script type="text/javascript" src="http://libs.baidu.com/jquery/1.7.2/jquery.min.js"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=bFNYmleHunu49WxpIlCN8QxTpzs93c8V"></script>*@
+<script type="text/javascript">
+
+    $(function () {
+        // init();
+        loadshow();//样式加载
+
+        alertify.set({
+            labels: {
+                ok: "确认",
+                cancel: "取消"
+            },
+            delay: 5000,
+            buttonreverse: false,
+            buttonFocus: "ok"
+        });
+
+
+        $(".close").click(function () {
+            $("#myAlert").hidden();
+        });
+
+        //留言保存
+        $("#comment-form-btn").click(function () {
+            alertify.alert(123);
+            return;
+            var msg = $(".w-e-text").html();
+            var reg = /<(?!img).*?>/g;
+            var text = msg.replace(reg, '');
+
+            if (text == null || text === "") {
+                $("#myAlert").show();
+                $("#msgerror").text("亲~~您未留下任何痕迹哦..！");
+                return;
+            }
+
+            //获取地理位置
+            var position = "";
+            //getposition();
+            //alert(position);
+            var $this = $(this);
+            $this.button('loading');
+            var obj = new Object();
+            obj.msg = msg;
+            obj.position = position;
+            var data = JSON.stringify(obj);
+
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("SaveMsg", "Blog")",
+                data: { msg: msg },
+                //async: true,
+                success: function (result) {
+                    if (result.state === 0) {
+                        alert(result.msg);
+                    } else {
+                        alert(result.msg);
+                    }
+                    setTimeout(function () {
+                        $this.html("<i class='fa fa-check'></i>" + result.msg);
+                        setTimeout(function () {
+                            $this.button('reset');
+                            window.location.reload();
+                        }, 1000);
+                    }, 1000);
+                },
+                error: function (result) {
+                    alert(result.msg);
+                }
+            });
+        });
+    });
+
+    function OpenWindow() {
+        window.open('http://www.baidu.com',
+            '_blank',
+            'width=300,height=400,toolbars=0,resiable=1,left=300,top=300');
+    }
+</script>

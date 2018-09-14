@@ -1,0 +1,210 @@
+﻿@using StackExchange.Profiling;
+@MiniProfiler.RenderIncludes();
+@{
+    Layout = null;
+}<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+
+    <meta http-equiv="imagetoolbar" content="no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <title>Aliyun Music</title>
+    <link rel="shortcut icon" type="image/x-icon" href="~/Image/favicon.ico.png" />
+    @Html.Partial("_PartHeader") @*-----引入js和css*@
+    <style>
+        body {
+            background: url('../../Image/bpic1458.jpg') no-repeat center 0;
+            background-size: 100% 100%;
+            background-attachment: fixed;
+            font-size: 16px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .f_req {
+            font-size: 13px;
+            color: #ff0000;
+            font-family: helvetica, arial, sans-serif;
+        }
+
+        #logindiv {
+            height: 600px;
+            width: 600px;
+            position: absolute;
+            top: 20%;
+            background-color: rgba(255, 255, 255, 0.3);
+            left: 35%;
+        }
+    </style>
+</head>
+<body>
+<div id="logindiv">
+    <form id="form1" class="form-horizontal" method="POST" action="@Url.Action("Login")">
+        <div class="form-group" style="margin-top: 10%;">
+            <div class="col-sm-5"><img src="~/Image/ali123.png" style="line-height: 100px;width: 100px;margin-left:60%;margin-top:10%" /></div>
+            <div class="col-sm-7" style="line-height: 100px;"><h3>后台管理系统</h3></div>
+        </div>
+        <div class="form-group" style="margin-top: 10px;opacity: 1.2">
+            <label class=" col-sm-3 control-label"><span class="f_req"></span></label>
+            <div class="col-sm-6">
+                <input type="text" style="height: 45px;margin-bottom: 14px;background: url(/image/login_user.png) 0 0 #bdbdbd no-repeat;padding-left:60px;color:beige" class="form-control col-sm-6" id="LoginName" name="LoginName" value="@(Request.Cookies["cookieLoginname"] != null ? Request.Cookies["cookieLoginname"].Value : "")">
+
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label"><span class="f_req"></span></label>
+            <div class="col-sm-6">
+                <input type="password" style="height: 45px; margin-bottom: 14px; background:url(/image/login_pas.png) 0 0 #bdbdbd  no-repeat; padding-left: 60px;" required="required" class="form-control" id="PassWord" name="PassWord" value="@(Request.Cookies["cookiePassword"] != null ? Request.Cookies["cookiePassword"].Value : "")" placeholder="请输入密码...">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label"><span class="f_req"></span></label>
+            <div class="col-sm-6 input-group">
+                <input type="text" style="height: 45px; margin-bottom: 14px; background: url(/image/yz1.png) 0 0 #bdbdbd  no-repeat; padding-left: 60px;" required="required" class="form-control col-sm-3" id="ValidCode" name="ValidCode" value="" placeholder="请输入验证码...">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label"><span class="f_req"></span></label>
+            <div class="input-group col-sm-6">
+                <img src="/Login/CheckCode?ID=1" id="checkcode" onclick="ChangeCheckCode()" width="100" height="35" class="form-group"><a onclick="ChangeCheckCode()" style="cursor: pointer; text-decoration: none; height: 45px; line-height: 45px; margin-left: 20px;">看不清,请刷新</a>
+            </div>
+        </div>
+        <div class="form-group">
+            <label style="line-height: 45px;margin-left: 26%;text-align: right" class="col-sm-3"><input type="checkbox" name="Rember" />记住密码</label>
+            <a id="btnlogin" class="btn btn-success col-sm-2" style="margin-left: 10px;" data-loading-text="正在登录...">登录</a>
+        </div>
+    </form>
+</div>
+
+<script type="text/javascript">
+
+    $(function () {
+        $(document).keydown(function (event) {
+            if (event.keyCode == 13) {
+                $("#btnlogin").click();
+            }
+        });
+        $("#btnlogin").click(function () {
+            $("#form1").validate({
+                rules: {
+                    LoginName: {
+                        required: true
+                    },
+                    PassWord: {
+                        required: true
+                    },
+                    ValidCode: {
+                        required: true
+                    }
+                },
+                messages: {
+                    LoginName: {
+                        required: "用户名不能为空."
+                    },
+                    PassWord: {
+                        required: "密码不能为空."
+                    },
+                    ValidCode: {
+                        required: "验证码不能为空."
+                    }
+                },
+
+                errorPlacement: function (error, element) {
+                    element.next().remove(); //删除显示图标
+                    element.closest('.form-group').append(error); //显示错误消息提示
+                },
+                //给未通过验证的元素进行处理
+                highlight: function (element) {
+                    $(element).closest('.form-group').addClass('has-error has-feedback');
+                },
+
+                //验证通过的处理
+                success: function (label) {
+                    var el = label.closest('.form-group').find("input");
+                    el.next().remove();
+                    label.closest('.form-group').removeClass('has-error').addClass("has-feedback has-success");
+                    label.remove();
+                },
+
+                submitHandler: function () {
+                    $("#btnlogin").button('loading');
+                    $("form:first").ajaxSubmit(function (result) {
+                        if (result.state == 0) {
+                            $("#btnsave").button('reset');
+                            window.location.href = "@Url.Action("index", "Welcome")";
+                        } else {
+                            alert(result.msg);
+                            ChangeCheckCode();
+                            $("#btnlogin").button('reset');
+                        }
+                    });
+                }
+            });
+            //var a = $("#form1").serialize();
+            //alert(a);
+            $("form:first").submit();
+        });
+    });
+
+
+    //刷新验证码
+    function ChangeCheckCode() {
+        var code = $("#checkcode").attr("src");
+        $("#checkcode").attr("src", code + "1");
+    }
+
+    //清空
+    function FormReset() {
+        $("#form1").resetForm();
+    }
+</script>
+@*<script type="text/javascript">
+            (function ($) {
+                $.fn.snow = function (options) {
+                    var $flake = $('<div id="snowbox" />').css({ 'position': 'absolute', 'z-index': '9999', 'top': '-50px' }).html('<img src="/Image/music1.png" />'),
+                        documentHeight = $(document).height(),
+                        documentWidth = $(document).width(),
+                        defaults = {
+                            minSize: 10,
+                            maxSize: 20,
+                            newOn: 1000,
+                            flakeColor: "#AFDAEF" /* 此处可以定义雪花颜色，若要白色可以改为#FFFFFF */
+                        },
+                        options = $.extend({}, defaults, options);
+                    var interval = setInterval(function () {
+                        var startPositionLeft = Math.random() * documentWidth - 100,
+                            startOpacity = 0.5 + Math.random(),
+                            sizeFlake = options.minSize + Math.random() * options.maxSize,
+                            endPositionTop = documentHeight - 200,
+                            endPositionLeft = startPositionLeft - 500 + Math.random() * 500,
+                            durationFall = documentHeight * 10 + Math.random() * 5000;
+                        $flake.clone().appendTo('body').css({
+                            left: startPositionLeft,
+                            opacity: startOpacity,
+                            'font-size': sizeFlake,
+                            color: options.flakeColor
+                        }).animate({
+                            top: endPositionTop,
+                            left: endPositionLeft,
+                            opacity: 0.2
+                        }, durationFall, 'linear', function () {
+                            $(this).remove()
+                        });
+                    }, options.newOn);
+                };
+            })(jQuery);
+            $(function () {
+                $.fn.snow({
+                    minSize: 5, /* 定义雪花最小尺寸 */
+                    maxSize: 50,/* 定义雪花最大尺寸 */
+                    newOn: 300  /* 定义密集程度，数字越小越密集 */
+                });
+            });
+        </script>*@
+</body>
+</html>

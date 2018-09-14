@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="RymJiaMeng2014ModelStoreContainer" CdmEntityContainer="RymJiaMeng2014Entities">
+    <EntitySetMapping Name="Rym_Answer">
+      <EntityTypeMapping TypeName="RymJiaMeng2014Model.Rym_Answer">
+        <MappingFragment StoreEntitySet="Rym_Answer">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="questionid" ColumnName="questionid" />
+          <ScalarProperty Name="answer" ColumnName="answer" />
+          <ScalarProperty Name="isremark" ColumnName="isremark" />
+          <ScalarProperty Name="isorder" ColumnName="isorder" />
+          <ScalarProperty Name="isdelete" ColumnName="isdelete" />
+          <ScalarProperty Name="createid" ColumnName="createid" />
+          <ScalarProperty Name="createtime" ColumnName="createtime" />
+          <ScalarProperty Name="updateid" ColumnName="updateid" />
+          <ScalarProperty Name="updatetime" ColumnName="updatetime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,83 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+<form id="form1" class="form-horizontal" method="POST">
+    <div class="form-group">
+        <label style="text-align: center" class="control-label col-sm-5">注册</label>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">电子邮箱</label>
+        <div class="col-sm-3">
+            <input name="email" type="text" class="form-control" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">用户名</label>
+        <div class="col-sm-3">
+            <input name="username" type="text" class="form-control" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">密码</label>
+        <div class="col-sm-3">
+            <input name="password" type="text" class="form-control" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">再次输入密码</label>
+        <div class="col-sm-3">
+            <input name="passwordagain" type="text" class="form-control" />
+        </div>
+    </div>
+    <button id="btnsave" class="btn btn-success" style="margin-left: 20%;">提交</button>
+    <button type="submit" class="btn btn-danger">取消</button>
+</form>
+<script type="text/javascript">
+    $("#btnsave").click(function () {
+        $("#form1").validate({
+            rules: {
+                email: {
+                    required: true
+                },
+                username: {
+                    required: true
+                },
+                password: {
+                    required: true
+                },
+                passwordagain:
+                {
+                    required: true
+                }
+            },
+            messages: {
+                email: {
+                    required: "电子邮箱不能为空."
+                },
+                username: {
+                    required: "用户名不能为空."
+                },
+                password: {
+                    required: "密码不能为空."
+                },
+                passwordagain:
+                {
+                    required: "密码不能为空."
+                }
+            },
+            submitHandler: function () {
+                $("#form:first").ajaxSubmit(function (result) {
+                    if (result.state == 0) {
+                        alert(result.msg);
+                        window.location.reload();
+                    } else {
+                        alert(result.msg);
+                    }
+                });
+            },
+        });
+        $("form:first").submit();
+    });
+
+
+</script>

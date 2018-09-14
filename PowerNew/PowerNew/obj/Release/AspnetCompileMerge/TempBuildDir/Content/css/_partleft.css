@@ -1,0 +1,36 @@
+﻿
+a {
+    text-decoration: none;
+    outline: none
+}
+
+.panel-title {
+    text-align: center;
+}
+
+    .panel-title a {
+        text-decoration: none;
+        cursor: pointer;
+        outline: none
+    }
+
+        .panel-title a:hover {
+            color: blueviolet;
+        }
+
+.menu-children li {
+    height: 45px;
+    line-height: 45px;
+    overflow: hidden;
+    cursor: pointer;
+    text-align: center;
+}
+
+.menu-children a {
+    text-decoration: none;
+    outline: none
+}
+
+.menu-children li span:hover {
+    color: black;
+}

@@ -1,0 +1,5 @@
+G:\BJF文件集合\单元测试\PowerNew\MyTest\bin\Debug\MyTest.exe
+G:\BJF文件集合\单元测试\PowerNew\MyTest\bin\Debug\MyTest.pdb
+G:\BJF文件集合\单元测试\PowerNew\MyTest\obj\Debug\MyTest.exe
+G:\BJF文件集合\单元测试\PowerNew\MyTest\obj\Debug\MyTest.pdb
+G:\BJF文件集合\单元测试\PowerNew\MyTest\obj\Debug\MyTestAttribute.csprojResolveAssemblyReference.cache

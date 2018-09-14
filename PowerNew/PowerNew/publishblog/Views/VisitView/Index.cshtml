@@ -1,0 +1,229 @@
+﻿@{
+    ViewBag.Title = "Chart";
+}
+
+<h2>访问量图表统计</h2>
+<div class="alert alert-success alert-dismissable" style="display: none;text-align: center" id="alertid">
+    <button type="button" class="close" data-dismiss="alert"
+            aria-hidden="true">
+        &times;
+    </button>
+    暂无任何图表数据.....
+</div>
+@*<img id="valiCode1" style="width: 600px; height: 500px;" src="@Url.Action("Chart2")" />*@
+<div class="container" style="margin-top: 20px;">
+    <div class="row">
+        <div class="form-group">
+            <div class="col-sm-3" id="chartmain" style="width: 30%; height: 500px;"></div>
+            <div class="col-sm-3" id="chartmaincar" style="width: 30%; height: 500px;"></div>
+            <div class="col-sm-3" id="chartmainpie" style="width: 30%; height: 500px;"></div>
+        </div>
+    </div>
+</div>
+
+@*<div class="container" style="margin-top: 20px;">
+    <div class="row">
+        <div id="myCarousel" class="carousel slide">
+            <!-- 轮播（Carousel）指标 -->
+            <ol class="carousel-indicators">
+                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#myCarousel" data-slide-to="1"></li>
+                <li data-target="#myCarousel" data-slide-to="2"></li>
+            </ol>
+            <!-- 轮播（Carousel）项目 -->
+            <div class="carousel-inner">
+                <div class="item active">
+                    <div id="chartmain" style="height: 300px;"></div>
+                </div>
+                <div class="item">
+                    <div id="chartmaincar" style="height: 300px;width: 400px;"></div>
+                </div>
+                <div class="item">
+                    <div id="chartmainpie" style="height: 300px; width: 400px;"></div>
+                </div>
+            </div>
+            <!-- 轮播（Carousel）导航 -->
+            <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+</div>*@
+
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script src="~/Scripts/echarts.js"></script>
+<script type="text/javascript">
+
+    $(function () {
+        //------------------------------------------------------------------事例
+        //showdemo();
+
+        var objx = [];
+        var objy = [];
+        var objname = [];
+        var objinfo = [];
+        var url = "@Url.Action("GetParam")";
+        $.post(url, function (result) {
+            if (result.state == 0) {
+                objx = result.x;
+                objy = result.y;
+                objname = result.name;
+                objinfo = result.info;
+                //------------------------------------------------------------------折线图
+                var option = {
+                    title: {
+                        text: '折线',
+                        x:'center'
+                    },
+                    tooltip: {
+                        trigger: "axis",
+                        show: true
+                    },
+                    legend: {
+                        x: 'right',
+                        data: ['访问量']
+                    },
+                    xAxis: {
+                        data: objx
+                    },
+                    yAxis: {},
+                    series: [
+                        {
+                            name: '访问量',
+                            type: 'line',
+                            data: objy
+                        }
+                    ]
+                };
+                //初始化echarts实例
+                var myChart = echarts.init(document.getElementById('chartmain'));
+                //使用制定的配置项和数据显示图表
+                myChart.setOption(option);
+                //------------------------------------------------------------------柱状图
+                var option1 = {
+                    title: {
+                        text: '柱状',
+                        x: 'center'
+                    },
+                    tooltip: {
+                        trigger: "axis",
+                        show: true
+                    },
+                    legend: {
+                        x: 'right',
+                        data: ['访问量']
+                    },
+                    xAxis: {
+                        data: objx
+                    },
+                    yAxis: {},
+                    series: [
+                        {
+                            name: '访问量',
+                            type: 'bar',
+                            data: objy
+                        }
+                    ]
+                };
+                //初始化echarts实例
+                var myChart1 = echarts.init(document.getElementById('chartmaincar'));
+                //使用制定的配置项和数据显示图表
+                myChart1.setOption(option1);
+                //------------------------------------------------------------------饼状图
+                var option2 = {
+                    title: {
+                        text: '饼状',
+                        x: 'center'
+                    },
+                    tooltip: {
+                        trigger: 'item'
+                    },
+                    legend: {
+                        orient: 'vertical',
+                        x: 'right',
+                        data: objname
+                    },
+                    series: [
+                        {
+                            name: '访问量',
+                            type: 'pie',
+                            radius: '55%',//饼图的半径大小
+                            center: ['50%', '60%'],//饼图的位置
+                            data: objinfo
+                        }
+                    ]
+                };
+                //初始化echarts实例
+                var myChart2 = echarts.init(document.getElementById('chartmainpie'));
+                //使用制定的配置项和数据显示图表
+                myChart2.setOption(option2);
+
+            } else {
+                $("#alertid").show();
+            }
+        });
+    });
+
+    function showdemo() {
+        var echartsPie;
+        var json = [
+            { value: 30, name: '高圆圆' },
+            { value: 26, name: '赵丽颖' },
+            { value: 24, name: '江莱' }
+        ];
+        var option = {
+            title: {
+                text: '女神年龄分布',
+                subtext: '独家报道',
+                x: 'center'
+            },
+            tooltip: {
+                trigger: 'item',
+                formatter: "{a} <br/>{b} : {c} 岁"
+            },
+            legend: {
+                orient: 'vertical',
+                x: 'left',
+                data: ['高圆圆', '赵丽颖', '江莱']
+            },
+            toolbox: {
+                show: true,
+                feature: {
+                    mark: { show: true },
+                    dataView: { show: true, readOnly: false },
+                    magicType: {
+                        show: true,
+                        type: ['pie', 'funnel'],
+                        option: {
+                            funnel: {
+                                x: '25%',
+                                width: '50%',
+                                funnelAlign: 'left',
+                                max: 1548
+                            }
+                        }
+                    },
+                    restore: { show: true },
+                    saveAsImage: { show: true }
+                }
+            },
+            calculable: true,
+            series: [
+                {
+                    name: '女神',
+                    type: 'pie',
+                    radius: '55%',//饼图的半径大小
+                    center: ['50%', '60%'],//饼图的位置
+                    data: json
+                }
+            ]
+        };
+        echartsPie = echarts.init(document.getElementById('chartmainF'));
+        echartsPie.setOption(option);
+    }
+</script>

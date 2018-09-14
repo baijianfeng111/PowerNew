@@ -1,0 +1,651 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="powerbjfModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="bjf_account">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="255" />
+          <Property Name="mobile" Type="varchar" MaxLength="255" />
+          <Property Name="domainname" Type="varchar" MaxLength="255" />
+          <Property Name="domainshortname" Type="varchar" MaxLength="255" />
+          <Property Name="dbserver" Type="varchar" MaxLength="255" />
+          <Property Name="dbname" Type="varchar" MaxLength="255" />
+          <Property Name="dbuserid" Type="varchar" MaxLength="255" />
+          <Property Name="dbpassword" Type="varchar" MaxLength="255" />
+          <Property Name="comment" Type="varchar" MaxLength="255" />
+          <Property Name="state" Type="int" />
+          <Property Name="createid" Type="int" Nullable="false" />
+          <Property Name="createtime" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="updateid" Type="int" Nullable="false" />
+          <Property Name="updatetime" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="isdelete" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="bjf_article">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="content" Type="varchar" MaxLength="5000" />
+          <Property Name="readcount" Type="int" Nullable="false" />
+          <Property Name="isdelete" Type="bit" Nullable="false" />
+          <Property Name="createid" Type="int" Nullable="false" />
+          <Property Name="createtime" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="updateid" Type="int" Nullable="false" />
+          <Property Name="updatetime" Type="datetime" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="bjf_articleinfo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userid" Type="int" Nullable="false" />
+          <Property Name="parentid" Type="int" Nullable="false" />
+          <Property Name="typeid" Type="int" Nullable="false" />
+          <Property Name="title" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="photourl" Type="varchar" MaxLength="255" />
+          <Property Name="content" Type="varchar" MaxLength="5000" />
+          <Property Name="readcount" Type="int" Nullable="false" />
+          <Property Name="createid" Type="int" Nullable="false" />
+          <Property Name="createtime" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="updateid" Type="int" Nullable="false" />
+          <Property Name="updatetime" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="isdelete" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="bjf_articletype">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="parentid" Type="int" Nullable="false" />
+          <Property Name="comment" Type="varchar" MaxLength="255" />
+          <Property Name="createid" Type="int" Nullable="false" />
+          <Property Name="createtime" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="updateid" Type="int" Nullable="false" />
+          <Property Name="updatetime" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="isdelete" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="bjf_block">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="blockname" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="isuse" Type="int" Nullable="false" />
+          <Property Name="sortcode" Type="int" Nullable="false" />
+          <Property Name="isdelete" Type="bit" Nullable="false" />
+          <Property Name="deletetime" Type="datetime" Precision="0" />
+          <Property Name="createid" Type="int" Nullable="false" />
+          <Property Name="createtime" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="updateid" Type="int" Nullable="false" />
+          <Property Name="updatetime" Type="datetime" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="bjf_leavemessage">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="type" Type="bit" Nullable="false" />
+          <Property Name="parentid" Type="int" Nullable="false" />
+          <Property Name="message" Type="varchar" MaxLength="500" />
+          <Property Name="position" Type="varchar" MaxLength="255" />
+          <Property Name="createtime" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="255" />
+          <Property Name="browser" Type="varchar" MaxLength="255" />
+          <Property Name="ip" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="bjf_loginlog">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ip" Type="varchar" MaxLength="255" />
+          <Property Name="userid" Type="int" Nullable="false" />
+          <Property Name="logintime" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="createtime" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="updatetime" Type="datetime" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="bjf_menu">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="menuname" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="menucode" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="blockid" Type="int" />
+          <Property Name="menuhref" Type="varchar" MaxLength="255" />
+          <Property Name="isgroup" Type="bit" Nullable="false" />
+          <Property Name="parentid" Type="int" />
+          <Property Name="isuse" Type="bit" Nullable="false" />
+          <Property Name="sortcode" Type="int" Nullable="false" />
+          <Property Name="isdelete" Type="bit" Nullable="false" />
+          <Property Name="deletetime" Type="datetime" Precision="0" />
+          <Property Name="createid" Type="int" Nullable="false" />
+          <Property Name="createtime" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="updateid" Type="int" Nullable="false" />
+          <Property Name="updatetime" Type="datetime" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="bjf_role">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="openid" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="rolename" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="rolecode" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="isuse" Type="int" Nullable="false" />
+          <Property Name="createid" Type="int" Nullable="false" />
+          <Property Name="createtime" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="isdelete" Type="bit" Nullable="false" />
+          <Property Name="deletetime" Type="datetime" Precision="0" />
+          <Property Name="updateid" Type="int" Nullable="false" />
+          <Property Name="updatetime" Type="datetime" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="bjf_roleformenu">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="roleid" Type="int" Nullable="false" />
+          <Property Name="menuid" Type="int" Nullable="false" />
+          <Property Name="createtime" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="createid" Type="int" Nullable="false" />
+          <Property Name="updateid" Type="int" Nullable="false" />
+          <Property Name="updatetime" Type="datetime" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="bjf_roleforuser">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="roleid" Type="int" Nullable="false" />
+          <Property Name="userid" Type="int" Nullable="false" />
+          <Property Name="isdelete" Type="bit" Nullable="false" />
+          <Property Name="deletetime" Type="datetime" Precision="0" />
+          <Property Name="createtime" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="createid" Type="int" Nullable="false" />
+          <Property Name="updateid" Type="int" Nullable="false" />
+          <Property Name="updatetime" Type="datetime" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="bjf_user">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="openid" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="loginname" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="255" />
+          <Property Name="idcard" Type="varchar" MaxLength="255" />
+          <Property Name="mobile" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="isadmin" Type="int" Nullable="false" />
+          <Property Name="comment" Type="varchar" MaxLength="255" />
+          <Property Name="isdelete" Type="bit" Nullable="false" />
+          <Property Name="deletetime" Type="datetime" Precision="0" />
+          <Property Name="createid" Type="int" Nullable="false" />
+          <Property Name="createtime" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="updateid" Type="int" Nullable="false" />
+          <Property Name="updatetime" Type="datetime" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="powerbjfModelStoreContainer">
+          <EntitySet Name="bjf_account" EntityType="Self.bjf_account" Schema="powerbjf" store:Type="Tables" />
+          <EntitySet Name="bjf_article" EntityType="Self.bjf_article" Schema="powerbjf" store:Type="Tables" />
+          <EntitySet Name="bjf_articleinfo" EntityType="Self.bjf_articleinfo" Schema="powerbjf" store:Type="Tables" />
+          <EntitySet Name="bjf_articletype" EntityType="Self.bjf_articletype" Schema="powerbjf" store:Type="Tables" />
+          <EntitySet Name="bjf_block" EntityType="Self.bjf_block" Schema="powerbjf" store:Type="Tables" />
+          <EntitySet Name="bjf_leavemessage" EntityType="Self.bjf_leavemessage" Schema="powerbjf" store:Type="Tables" />
+          <EntitySet Name="bjf_loginlog" EntityType="Self.bjf_loginlog" Schema="powerbjf" store:Type="Tables" />
+          <EntitySet Name="bjf_menu" EntityType="Self.bjf_menu" Schema="powerbjf" store:Type="Tables" />
+          <EntitySet Name="bjf_role" EntityType="Self.bjf_role" Schema="powerbjf" store:Type="Tables" />
+          <EntitySet Name="bjf_roleformenu" EntityType="Self.bjf_roleformenu" Schema="powerbjf" store:Type="Tables" />
+          <EntitySet Name="bjf_roleforuser" EntityType="Self.bjf_roleforuser" Schema="powerbjf" store:Type="Tables" />
+          <EntitySet Name="bjf_user" EntityType="Self.bjf_user" Schema="powerbjf" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="powerbjfModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="bjf_account">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="mobile" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="domainname" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="domainshortname" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="dbserver" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="dbname" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="dbuserid" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="dbpassword" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="comment" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="state" Type="Int32" />
+          <Property Name="createid" Type="Int32" Nullable="false" />
+          <Property Name="createtime" Type="DateTime" Nullable="false" />
+          <Property Name="updateid" Type="Int32" Nullable="false" />
+          <Property Name="updatetime" Type="DateTime" Nullable="false" />
+          <Property Name="isdelete" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="bjf_article">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="content" Type="String" MaxLength="5000" FixedLength="false" Unicode="false" />
+          <Property Name="readcount" Type="Int32" Nullable="false" />
+          <Property Name="isdelete" Type="Boolean" Nullable="false" />
+          <Property Name="createid" Type="Int32" Nullable="false" />
+          <Property Name="createtime" Type="DateTime" Nullable="false" />
+          <Property Name="updateid" Type="Int32" Nullable="false" />
+          <Property Name="updatetime" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="bjf_block">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="blockname" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="isuse" Type="Int32" Nullable="false" />
+          <Property Name="sortcode" Type="Int32" Nullable="false" />
+          <Property Name="isdelete" Type="Boolean" Nullable="false" />
+          <Property Name="deletetime" Type="DateTime" />
+          <Property Name="createid" Type="Int32" Nullable="false" />
+          <Property Name="createtime" Type="DateTime" Nullable="false" />
+          <Property Name="updateid" Type="Int32" Nullable="false" />
+          <Property Name="updatetime" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="bjf_loginlog">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ip" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="userid" Type="Int32" Nullable="false" />
+          <Property Name="logintime" Type="DateTime" Nullable="false" />
+          <Property Name="createtime" Type="DateTime" Nullable="false" />
+          <Property Name="updatetime" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="bjf_menu">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="menuname" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="menucode" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="blockid" Type="Int32" />
+          <Property Name="menuhref" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="isgroup" Type="Boolean" Nullable="false" />
+          <Property Name="parentid" Type="Int32" />
+          <Property Name="isuse" Type="Boolean" Nullable="false" />
+          <Property Name="sortcode" Type="Int32" Nullable="false" />
+          <Property Name="isdelete" Type="Boolean" Nullable="false" />
+          <Property Name="deletetime" Type="DateTime" />
+          <Property Name="createid" Type="Int32" Nullable="false" />
+          <Property Name="createtime" Type="DateTime" Nullable="false" />
+          <Property Name="updateid" Type="Int32" Nullable="false" />
+          <Property Name="updatetime" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="bjf_role">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="openid" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="rolename" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="rolecode" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="isuse" Type="Int32" Nullable="false" />
+          <Property Name="createid" Type="Int32" Nullable="false" />
+          <Property Name="createtime" Type="DateTime" Nullable="false" />
+          <Property Name="isdelete" Type="Boolean" Nullable="false" />
+          <Property Name="deletetime" Type="DateTime" />
+          <Property Name="updateid" Type="Int32" Nullable="false" />
+          <Property Name="updatetime" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="bjf_roleformenu">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="roleid" Type="Int32" Nullable="false" />
+          <Property Name="menuid" Type="Int32" Nullable="false" />
+          <Property Name="createtime" Type="DateTime" Nullable="false" />
+          <Property Name="createid" Type="Int32" Nullable="false" />
+          <Property Name="updateid" Type="Int32" Nullable="false" />
+          <Property Name="updatetime" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="bjf_roleforuser">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="roleid" Type="Int32" Nullable="false" />
+          <Property Name="userid" Type="Int32" Nullable="false" />
+          <Property Name="isdelete" Type="Boolean" Nullable="false" />
+          <Property Name="deletetime" Type="DateTime" />
+          <Property Name="createtime" Type="DateTime" Nullable="false" />
+          <Property Name="createid" Type="Int32" Nullable="false" />
+          <Property Name="updateid" Type="Int32" Nullable="false" />
+          <Property Name="updatetime" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="bjf_user">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="openid" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="username" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="loginname" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="idcard" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="mobile" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="isadmin" Type="Int32" Nullable="false" />
+          <Property Name="comment" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="isdelete" Type="Boolean" Nullable="false" />
+          <Property Name="deletetime" Type="DateTime" />
+          <Property Name="createid" Type="Int32" Nullable="false" />
+          <Property Name="createtime" Type="DateTime" Nullable="false" />
+          <Property Name="updateid" Type="Int32" Nullable="false" />
+          <Property Name="updatetime" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="powerbjfEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="bjf_account" EntityType="Self.bjf_account" />
+          <EntitySet Name="bjf_article" EntityType="Self.bjf_article" />
+          <EntitySet Name="bjf_block" EntityType="Self.bjf_block" />
+          <EntitySet Name="bjf_loginlog" EntityType="Self.bjf_loginlog" />
+          <EntitySet Name="bjf_menu" EntityType="Self.bjf_menu" />
+          <EntitySet Name="bjf_role" EntityType="Self.bjf_role" />
+          <EntitySet Name="bjf_roleformenu" EntityType="Self.bjf_roleformenu" />
+          <EntitySet Name="bjf_roleforuser" EntityType="Self.bjf_roleforuser" />
+          <EntitySet Name="bjf_user" EntityType="Self.bjf_user" />
+          <EntitySet Name="bjf_articletype" EntityType="powerbjfModel.bjf_articletype" />
+          <EntitySet Name="bjf_articleinfo" EntityType="powerbjfModel.bjf_articleinfo" />
+          <EntitySet Name="bjf_leavemessage" EntityType="powerbjfModel.bjf_leavemessage" />
+        </EntityContainer>
+        <EntityType Name="bjf_articletype">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="parentid" Type="Int32" Nullable="false" />
+          <Property Name="comment" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="createid" Type="Int32" Nullable="false" />
+          <Property Name="createtime" Type="DateTime" Nullable="false" />
+          <Property Name="updateid" Type="Int32" Nullable="false" />
+          <Property Name="updatetime" Type="DateTime" Nullable="false" />
+          <Property Name="isdelete" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="bjf_articleinfo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userid" Type="Int32" Nullable="false" />
+          <Property Name="parentid" Type="Int32" Nullable="false" />
+          <Property Name="typeid" Type="Int32" Nullable="false" />
+          <Property Name="title" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="photourl" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="content" Type="String" MaxLength="5000" FixedLength="false" Unicode="false" />
+          <Property Name="readcount" Type="Int32" Nullable="false" />
+          <Property Name="createid" Type="Int32" Nullable="false" />
+          <Property Name="createtime" Type="DateTime" Nullable="false" />
+          <Property Name="updateid" Type="Int32" Nullable="false" />
+          <Property Name="updatetime" Type="DateTime" Nullable="false" />
+          <Property Name="isdelete" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="bjf_leavemessage">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="type" Type="Boolean" Nullable="false" />
+          <Property Name="parentid" Type="Int32" Nullable="false" />
+          <Property Name="message" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="position" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="createtime" Type="DateTime" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="browser" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ip" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="powerbjfModelStoreContainer" CdmEntityContainer="powerbjfEntities1">
+          <EntitySetMapping Name="bjf_account">
+            <EntityTypeMapping TypeName="powerbjfModel.bjf_account">
+              <MappingFragment StoreEntitySet="bjf_account">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="mobile" ColumnName="mobile" />
+                <ScalarProperty Name="domainname" ColumnName="domainname" />
+                <ScalarProperty Name="domainshortname" ColumnName="domainshortname" />
+                <ScalarProperty Name="dbserver" ColumnName="dbserver" />
+                <ScalarProperty Name="dbname" ColumnName="dbname" />
+                <ScalarProperty Name="dbuserid" ColumnName="dbuserid" />
+                <ScalarProperty Name="dbpassword" ColumnName="dbpassword" />
+                <ScalarProperty Name="comment" ColumnName="comment" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="createid" ColumnName="createid" />
+                <ScalarProperty Name="createtime" ColumnName="createtime" />
+                <ScalarProperty Name="updateid" ColumnName="updateid" />
+                <ScalarProperty Name="updatetime" ColumnName="updatetime" />
+                <ScalarProperty Name="isdelete" ColumnName="isdelete" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="bjf_article">
+            <EntityTypeMapping TypeName="powerbjfModel.bjf_article">
+              <MappingFragment StoreEntitySet="bjf_article">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="content" ColumnName="content" />
+                <ScalarProperty Name="readcount" ColumnName="readcount" />
+                <ScalarProperty Name="isdelete" ColumnName="isdelete" />
+                <ScalarProperty Name="createid" ColumnName="createid" />
+                <ScalarProperty Name="createtime" ColumnName="createtime" />
+                <ScalarProperty Name="updateid" ColumnName="updateid" />
+                <ScalarProperty Name="updatetime" ColumnName="updatetime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="bjf_block">
+            <EntityTypeMapping TypeName="powerbjfModel.bjf_block">
+              <MappingFragment StoreEntitySet="bjf_block">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="blockname" ColumnName="blockname" />
+                <ScalarProperty Name="isuse" ColumnName="isuse" />
+                <ScalarProperty Name="sortcode" ColumnName="sortcode" />
+                <ScalarProperty Name="isdelete" ColumnName="isdelete" />
+                <ScalarProperty Name="deletetime" ColumnName="deletetime" />
+                <ScalarProperty Name="createid" ColumnName="createid" />
+                <ScalarProperty Name="createtime" ColumnName="createtime" />
+                <ScalarProperty Name="updateid" ColumnName="updateid" />
+                <ScalarProperty Name="updatetime" ColumnName="updatetime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="bjf_loginlog">
+            <EntityTypeMapping TypeName="powerbjfModel.bjf_loginlog">
+              <MappingFragment StoreEntitySet="bjf_loginlog">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="ip" ColumnName="ip" />
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="logintime" ColumnName="logintime" />
+                <ScalarProperty Name="createtime" ColumnName="createtime" />
+                <ScalarProperty Name="updatetime" ColumnName="updatetime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="bjf_menu">
+            <EntityTypeMapping TypeName="powerbjfModel.bjf_menu">
+              <MappingFragment StoreEntitySet="bjf_menu">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="menuname" ColumnName="menuname" />
+                <ScalarProperty Name="menucode" ColumnName="menucode" />
+                <ScalarProperty Name="blockid" ColumnName="blockid" />
+                <ScalarProperty Name="menuhref" ColumnName="menuhref" />
+                <ScalarProperty Name="isgroup" ColumnName="isgroup" />
+                <ScalarProperty Name="parentid" ColumnName="parentid" />
+                <ScalarProperty Name="isuse" ColumnName="isuse" />
+                <ScalarProperty Name="sortcode" ColumnName="sortcode" />
+                <ScalarProperty Name="isdelete" ColumnName="isdelete" />
+                <ScalarProperty Name="deletetime" ColumnName="deletetime" />
+                <ScalarProperty Name="createid" ColumnName="createid" />
+                <ScalarProperty Name="createtime" ColumnName="createtime" />
+                <ScalarProperty Name="updateid" ColumnName="updateid" />
+                <ScalarProperty Name="updatetime" ColumnName="updatetime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="bjf_role">
+            <EntityTypeMapping TypeName="powerbjfModel.bjf_role">
+              <MappingFragment StoreEntitySet="bjf_role">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="openid" ColumnName="openid" />
+                <ScalarProperty Name="rolename" ColumnName="rolename" />
+                <ScalarProperty Name="rolecode" ColumnName="rolecode" />
+                <ScalarProperty Name="isuse" ColumnName="isuse" />
+                <ScalarProperty Name="createid" ColumnName="createid" />
+                <ScalarProperty Name="createtime" ColumnName="createtime" />
+                <ScalarProperty Name="isdelete" ColumnName="isdelete" />
+                <ScalarProperty Name="deletetime" ColumnName="deletetime" />
+                <ScalarProperty Name="updateid" ColumnName="updateid" />
+                <ScalarProperty Name="updatetime" ColumnName="updatetime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="bjf_roleformenu">
+            <EntityTypeMapping TypeName="powerbjfModel.bjf_roleformenu">
+              <MappingFragment StoreEntitySet="bjf_roleformenu">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="roleid" ColumnName="roleid" />
+                <ScalarProperty Name="menuid" ColumnName="menuid" />
+                <ScalarProperty Name="createtime" ColumnName="createtime" />
+                <ScalarProperty Name="createid" ColumnName="createid" />
+                <ScalarProperty Name="updateid" ColumnName="updateid" />
+                <ScalarProperty Name="updatetime" ColumnName="updatetime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="bjf_roleforuser">
+            <EntityTypeMapping TypeName="powerbjfModel.bjf_roleforuser">
+              <MappingFragment StoreEntitySet="bjf_roleforuser">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="roleid" ColumnName="roleid" />
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="isdelete" ColumnName="isdelete" />
+                <ScalarProperty Name="deletetime" ColumnName="deletetime" />
+                <ScalarProperty Name="createtime" ColumnName="createtime" />
+                <ScalarProperty Name="createid" ColumnName="createid" />
+                <ScalarProperty Name="updateid" ColumnName="updateid" />
+                <ScalarProperty Name="updatetime" ColumnName="updatetime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="bjf_user">
+            <EntityTypeMapping TypeName="powerbjfModel.bjf_user">
+              <MappingFragment StoreEntitySet="bjf_user">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="openid" ColumnName="openid" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="loginname" ColumnName="loginname" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="idcard" ColumnName="idcard" />
+                <ScalarProperty Name="mobile" ColumnName="mobile" />
+                <ScalarProperty Name="isadmin" ColumnName="isadmin" />
+                <ScalarProperty Name="comment" ColumnName="comment" />
+                <ScalarProperty Name="isdelete" ColumnName="isdelete" />
+                <ScalarProperty Name="deletetime" ColumnName="deletetime" />
+                <ScalarProperty Name="createid" ColumnName="createid" />
+                <ScalarProperty Name="createtime" ColumnName="createtime" />
+                <ScalarProperty Name="updateid" ColumnName="updateid" />
+                <ScalarProperty Name="updatetime" ColumnName="updatetime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="bjf_articletype">
+            <EntityTypeMapping TypeName="powerbjfModel.bjf_articletype">
+              <MappingFragment StoreEntitySet="bjf_articletype">
+                <ScalarProperty Name="isdelete" ColumnName="isdelete" />
+                <ScalarProperty Name="updatetime" ColumnName="updatetime" />
+                <ScalarProperty Name="updateid" ColumnName="updateid" />
+                <ScalarProperty Name="createtime" ColumnName="createtime" />
+                <ScalarProperty Name="createid" ColumnName="createid" />
+                <ScalarProperty Name="comment" ColumnName="comment" />
+                <ScalarProperty Name="parentid" ColumnName="parentid" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="bjf_articleinfo">
+            <EntityTypeMapping TypeName="powerbjfModel.bjf_articleinfo">
+              <MappingFragment StoreEntitySet="bjf_articleinfo">
+                <ScalarProperty Name="isdelete" ColumnName="isdelete" />
+                <ScalarProperty Name="updatetime" ColumnName="updatetime" />
+                <ScalarProperty Name="updateid" ColumnName="updateid" />
+                <ScalarProperty Name="createtime" ColumnName="createtime" />
+                <ScalarProperty Name="createid" ColumnName="createid" />
+                <ScalarProperty Name="readcount" ColumnName="readcount" />
+                <ScalarProperty Name="content" ColumnName="content" />
+                <ScalarProperty Name="photourl" ColumnName="photourl" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="typeid" ColumnName="typeid" />
+                <ScalarProperty Name="parentid" ColumnName="parentid" />
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="bjf_leavemessage">
+            <EntityTypeMapping TypeName="powerbjfModel.bjf_leavemessage">
+              <MappingFragment StoreEntitySet="bjf_leavemessage">
+                <ScalarProperty Name="ip" ColumnName="ip" />
+                <ScalarProperty Name="browser" ColumnName="browser" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="createtime" ColumnName="createtime" />
+                <ScalarProperty Name="position" ColumnName="position" />
+                <ScalarProperty Name="message" ColumnName="message" />
+                <ScalarProperty Name="parentid" ColumnName="parentid" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

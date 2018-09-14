@@ -1,0 +1,53 @@
+﻿@using System.Configuration
+<header class="am-topbar" style="position:fixed; top: 0; width: 100%; z-index: 999; background-color: rgba(255, 255, 255, 0.9); ">
+    <h1 class="am-topbar-brand">
+        <a href="@Url.Action("index", "Home")">Aaron's blog</a>
+    </h1>
+    <div class="am-collapse am-topbar-collapse" id="doc-topbar-collapse">
+        <ul id="navigateMenu" class="am-nav am-nav-pills am-topbar-nav">
+            <li id="navigateIndex"><a href="@Url.Action("index", "Blog")">首页</a></li>
+            <li id="navigateMessageBoard"><a href="@Url.Action("MessageBoard", "Blog")">留言板</a></li>
+            <li class="am-dropdown" data-am-dropdown>
+                <a class="am-dropdown-toggle" data-am-dropdown-toggle href="javascript:;">
+                    更多 <span class="am-icon-caret-down"></span>
+                </a>
+                <ul class="am-dropdown-content">
+                    <li><a href="@Url.Action("Login", "Login")">后台管理</a></li>
+                    <li><a href="#">关于字体</a></li>
+                </ul>
+            </li>
+        </ul>
+        <script>
+            $(function () {
+                //设置导航栏菜单切换效果
+                //当前地址是首页
+                if ('@Request.Url' == "@ConfigurationManager.AppSettings["domainName"]/") {
+                    $("#navigateIndex").attr("class", "am-active");
+                }
+                //当前地址是留言板
+                if ('@Request.Url'.indexOf("MessageBoard") != -1) {
+                    $("#navigateMessageBoard").attr("class", "am-active");
+                }
+            });
+        </script>
+        <form id="ArticleSearchForm" class="am-topbar-form am-topbar-left am-form-inline am-topbar-right" role="search" method="POST" action="@Url.Action("SearchArticle", "Blog")">
+            <div class="am-form-group">
+                <input id="searchStr" name="searchStr" type="text" class="am-form-field am-input-sm" placeholder="搜索文章">
+                <input type="hidden" name="type" value="articletitle" />
+                <input type="hidden" name="pageIndex" value="1" />
+            </div>
+            <button id="btnSearch" type="button" class="am-btn am-btn-default am-btn-sm">搜索</button>
+            <script>
+                $(function () {
+                    $("#btnSearch").click(function () {
+                        if ($("#searchStr").val().length <= 0) {
+                            location.href = "@Url.Action("Index", "Blog")";
+                        }
+                        $("#ArticleSearchForm").submit();
+                    });
+                });
+            </script>
+        </form>
+    </div>
+</header>
+

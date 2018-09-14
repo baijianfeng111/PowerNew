@@ -1,0 +1,14 @@
+G:\BJF文件集合\单元测试\PowerNew\WindowsAsyncMore\bin\Release\WindowsAsyncMore.exe.config
+G:\BJF文件集合\单元测试\PowerNew\WindowsAsyncMore\bin\Release\WindowsAsyncMore.exe
+G:\BJF文件集合\单元测试\PowerNew\WindowsAsyncMore\bin\Release\WindowsAsyncMore.pdb
+G:\BJF文件集合\单元测试\PowerNew\WindowsAsyncMore\bin\Release\EntityFramework.dll
+G:\BJF文件集合\单元测试\PowerNew\WindowsAsyncMore\bin\Release\EntityFramework.SqlServer.dll
+G:\BJF文件集合\单元测试\PowerNew\WindowsAsyncMore\bin\Release\EntityFramework.xml
+G:\BJF文件集合\单元测试\PowerNew\WindowsAsyncMore\bin\Release\EntityFramework.SqlServer.xml
+G:\BJF文件集合\单元测试\PowerNew\WindowsAsyncMore\bin\Release\zh-Hans\EntityFramework.resources.dll
+G:\BJF文件集合\单元测试\PowerNew\WindowsAsyncMore\bin\Release\zh-Hans\EntityFramework.SqlServer.resources.dll
+G:\BJF文件集合\单元测试\PowerNew\WindowsAsyncMore\obj\Release\WindowsAsyncMore.Form1.resources
+G:\BJF文件集合\单元测试\PowerNew\WindowsAsyncMore\obj\Release\WindowsAsyncMore.Properties.Resources.resources
+G:\BJF文件集合\单元测试\PowerNew\WindowsAsyncMore\obj\Release\WindowsAsyncMore.csproj.GenerateResource.Cache
+G:\BJF文件集合\单元测试\PowerNew\WindowsAsyncMore\obj\Release\WindowsAsyncMore.exe
+G:\BJF文件集合\单元测试\PowerNew\WindowsAsyncMore\obj\Release\WindowsAsyncMore.pdb

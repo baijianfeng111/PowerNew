@@ -1,0 +1,56 @@
+﻿<style>
+    .topdiv, .topdiv div {
+        height: 70px;
+        margin: 0 auto;
+    }
+
+    .nav li a {
+        color: white;
+    }
+
+        .nav li a:hover {
+            background: none;
+            outline: none;
+            color: blueviolet;
+        }
+
+    .nav li ul a:hover {
+        color: blueviolet;
+    }
+</style>
+<div class="form-group topdiv">
+    <div id="div2" class="col-sm-2" style="text-align: center">
+        <a href="@Url.Action("Index","Blog")" target="_blank"><img src="~/Image/newblog1.png" style="width: 90px; height: 60px;padding-top: 10px" /></a>
+    </div>
+    <div class="col-sm-1" style="border-left: 2px dashed white;padding:10px 0px 10px 0px">
+        @*<img src="~/Image/xuline.png" style="padding-top: 20px;" />*@
+    </div>
+    <div class="col-sm-3">
+        <h3 style="color: white; font-weight: lighter">Aaron's Blog</h3>
+    </div>
+    <div class="col-sm-6">
+        <ul class="nav" id="topnav" style="float: right">
+            <li class="dropdown">
+                <a id="usera" class="btn dropdown-toggle" data-toggle="dropdown" style="cursor: pointer"><i class="glyphicon glyphicon-user"></i>@Session["username"]&nbsp;&nbsp;<i name="downa" class="glyphicon glyphicon-chevron-down"></i></a>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                    <li role="presentation" class="dropdown-header" style="width: 100%; cursor: pointer"><a style="color: red" role="menuitem" tabindex="-1"><i class="glyphicon glyphicon-edit"></i>修改密码</a></li>
+                    <li role="presentation" style="width: 100%; cursor: pointer"><a style="color: red" role="menuitem" tabindex="-1" href="@Url.Action("SignOut", "Login")"><i class="glyphicon glyphicon-share"></i>退出登录</a></li>
+                </ul>
+            </li>
+            <li><a href="@Url.Action("Index", "VisitView")"><i class="glyphicon glyphicon-volume-up"></i>站点访问</a></li>
+        </ul>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $("#usera").click(function () {
+            if ($(this).find("i[name='downa']").hasClass("glyphicon-chevron-down")) {
+                $(this).find("i[name='downa']").removeClass("glyphicon-chevron-down");
+                $(this).find("i[name='downa']").addClass("glyphicon-chevron-up");
+            } else {
+                $(this).find("i[name='downa']").removeClass("glyphicon-chevron-up");
+                $(this).find("i[name='downa']").addClass("glyphicon-chevron-down");
+            }
+        });
+    });
+</script>

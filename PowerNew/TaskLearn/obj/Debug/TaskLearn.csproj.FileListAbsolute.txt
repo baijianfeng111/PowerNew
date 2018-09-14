@@ -1,0 +1,6 @@
+G:\BJF文件集合\单元测试\PowerNew\TaskLearn\bin\Debug\TaskLearn.exe.config
+G:\BJF文件集合\单元测试\PowerNew\TaskLearn\bin\Debug\TaskLearn.exe
+G:\BJF文件集合\单元测试\PowerNew\TaskLearn\bin\Debug\TaskLearn.pdb
+G:\BJF文件集合\单元测试\PowerNew\TaskLearn\obj\Debug\TaskLearn.exe
+G:\BJF文件集合\单元测试\PowerNew\TaskLearn\obj\Debug\TaskLearn.pdb
+G:\BJF文件集合\单元测试\PowerNew\TaskLearn\obj\Debug\TaskLearn.csprojResolveAssemblyReference.cache

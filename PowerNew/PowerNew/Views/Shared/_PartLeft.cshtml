@@ -1,0 +1,128 @@
+﻿@using System.Configuration
+@using PowerNew.Bll
+@{
+    var list = LoginHelper.GetMenuGroup();
+    var url = ConfigurationManager.AppSettings["Url"];
+}
+
+<div class="col-sm-2" style="height: 100%; min-height: 800px; background-color:darkslategrey; overflow: auto;overflow-x:hidden">
+    <div class="panel-group" id="accordion1">
+        <div class="panel panel-default" style="margin-top: 10px;">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a><span>首页</span></a>
+                </h4>
+            </div>
+        </div>
+        @{
+            if (list.Count > 0)
+            {
+                foreach (var item in list)
+                {
+                    var index = list.IndexOf(item);
+                    var parentmodel = MenuManager.GetInstance().GetItemById(item.Parentid);
+                    <div class="panel panel-default">
+
+                        @if (index == 0)
+                        {
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" class="harfclass" data-parent="#accordion" href="#collapse_@index">
+                                        @parentmodel.menuname
+                                        <i style="float: right" class="glyphicon glyphicon-chevron-right"></i>
+                                    </a>
+
+                                </h4>
+                            </div>
+                            <div id="collapse_@index" class="panel-collapse collapse collapse">
+                                @*down in*@
+                                <div class="panel-body" style="background-color: aqua">
+                                    <ul class="menu-children">
+                                        @if (item.ChildList.Count > 0)
+                                        {
+                                            foreach (var c in item.ChildList)
+                                            {
+                                                var childmodel = MenuManager.GetInstance().GetItemById(c);
+                                                <li>
+                                                    <a href="@string.Format(url+childmodel.menuhref)" target="_self">
+                                                        <i class="glyphicon glyphicon-asterisk"></i>
+                                                        <span>@childmodel.menuname</span>
+                                                    </a>
+                                                </li>
+                                            }
+
+                                        }
+
+                                    </ul>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" class="harfclass" data-parent="#accordion" href="#collapse_@index">
+                                        @parentmodel.menuname
+                                        <i style="float: right" class="glyphicon glyphicon-chevron-right"></i>
+                                    </a>
+
+                                </h4>
+                            </div>
+                            <div id="collapse_@index" class="panel-collapse collapse collapse">
+                                <div class="panel-body" style=" background-color: aqua">
+                                    <ul class="menu-children">
+                                        @if (item.ChildList.Count > 0)
+                                        {
+                                            foreach (var c in item.ChildList)
+                                            {
+                                                var childmodel = MenuManager.GetInstance().GetItemById(c);
+                                                <li>
+                                                    <a href="@string.Format(url+childmodel.menuhref)" target="_self">
+                                                        <i class="glyphicon glyphicon-asterisk"></i>
+                                                        <span>@childmodel.menuname</span>
+                                                    </a>
+                                                </li>
+                                            }
+
+                                        }
+
+                                    </ul>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+            }
+        }
+    </div>
+
+    <div class="row" style="margin: auto; margin-top: 20px;">
+        <div class="jumbotron">
+            <h5 style="color: red">祝你好运</h5>
+            <p style="color: red">&nbsp;&nbsp;&nbsp;&nbsp;Good luck！</p>
+        </div>
+    </div>
+
+    <h5 class="row" style="margin: auto; clear: both">
+        <script charset="Shift_JIS" src="http://chabudai.sakura.ne.jp/blogparts/honehoneclock/honehone_clock_wh.js"></script>
+    </h5>
+
+    @*<h6 class="row" style="margin:auto;clear:both"></h6>*@
+</div>
+<link href="~/Content/css/demo.css" rel="stylesheet" />
+<script src="~/Content/js/script.js"></script>
+<link href="~/Content/css/_partleft.css" rel="stylesheet" />
+
+<script type="text/javascript">
+    $(function () {
+        $('.harfclass').click(function () {
+            if ($(this).find("i").hasClass("glyphicon-chevron-right")) {
+                $(this).find("i").removeClass('glyphicon-chevron-right');
+                $(this).find("i").addClass('glyphicon-chevron-down');
+            } else {
+                $(this).find("i").removeClass('glyphicon-chevron-down');
+                $(this).find("i").addClass('glyphicon-chevron-right');
+            }
+        });
+    });
+</script>

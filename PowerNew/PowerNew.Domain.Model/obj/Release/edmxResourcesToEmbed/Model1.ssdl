@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="powerbjfModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="bjf_block">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="blockname" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="isuse" Type="int" Nullable="false" />
+    <Property Name="sortcode" Type="int" Nullable="false" />
+    <Property Name="isdelete" Type="bit" Nullable="false" />
+    <Property Name="deletetime" Type="datetime" Precision="0" />
+    <Property Name="createid" Type="int" Nullable="false" />
+    <Property Name="createtime" Type="datetime" Precision="0" Nullable="false" />
+    <Property Name="updateid" Type="int" Nullable="false" />
+    <Property Name="updatetime" Type="datetime" Precision="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="bjf_loginlog">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ip" Type="varchar" MaxLength="255" />
+    <Property Name="userid" Type="int" Nullable="false" />
+    <Property Name="logintime" Type="datetime" Precision="0" Nullable="false" />
+    <Property Name="createtime" Type="datetime" Precision="0" Nullable="false" />
+    <Property Name="updatetime" Type="datetime" Precision="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="bjf_menu">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="menuname" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="menucode" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="blockid" Type="int" />
+    <Property Name="menuhref" Type="varchar" MaxLength="255" />
+    <Property Name="isgroup" Type="bit" Nullable="false" />
+    <Property Name="parentid" Type="int" />
+    <Property Name="isuse" Type="bit" Nullable="false" />
+    <Property Name="sortcode" Type="int" Nullable="false" />
+    <Property Name="isdelete" Type="bit" Nullable="false" />
+    <Property Name="deletetime" Type="datetime" Precision="0" />
+    <Property Name="createid" Type="int" Nullable="false" />
+    <Property Name="createtime" Type="datetime" Precision="0" Nullable="false" />
+    <Property Name="updateid" Type="int" Nullable="false" />
+    <Property Name="updatetime" Type="datetime" Precision="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="bjf_role">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="openid" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="rolename" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="rolecode" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="isuse" Type="int" Nullable="false" />
+    <Property Name="createid" Type="int" Nullable="false" />
+    <Property Name="createtime" Type="datetime" Precision="0" Nullable="false" />
+    <Property Name="isdelete" Type="bit" Nullable="false" />
+    <Property Name="deletetime" Type="datetime" Precision="0" />
+    <Property Name="updateid" Type="int" Nullable="false" />
+    <Property Name="updatetime" Type="datetime" Precision="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="bjf_roleforuser">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="roleid" Type="int" Nullable="false" />
+    <Property Name="userid" Type="int" Nullable="false" />
+    <Property Name="isdelete" Type="bit" Nullable="false" />
+    <Property Name="deletetime" Type="datetime" Precision="0" Nullable="false" />
+    <Property Name="createtime" Type="datetime" Precision="0" Nullable="false" />
+    <Property Name="createid" Type="int" Nullable="false" />
+    <Property Name="updateid" Type="int" Nullable="false" />
+    <Property Name="updatetime" Type="datetime" Precision="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="bjf_user">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="openid" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="username" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="loginname" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="password" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="email" Type="varchar" MaxLength="255" />
+    <Property Name="idcard" Type="varchar" MaxLength="255" />
+    <Property Name="mobile" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="isadmin" Type="int" Nullable="false" />
+    <Property Name="comment" Type="varchar" MaxLength="255" />
+    <Property Name="isdelete" Type="bit" Nullable="false" />
+    <Property Name="deletetime" Type="datetime" Precision="0" />
+    <Property Name="createid" Type="int" Nullable="false" />
+    <Property Name="createtime" Type="datetime" Precision="0" Nullable="false" />
+    <Property Name="updateid" Type="int" Nullable="false" />
+    <Property Name="updatetime" Type="datetime" Precision="0" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="powerbjfModelStoreContainer">
+    <EntitySet Name="bjf_block" EntityType="Self.bjf_block" Schema="powerbjf" store:Type="Tables" />
+    <EntitySet Name="bjf_loginlog" EntityType="Self.bjf_loginlog" Schema="powerbjf" store:Type="Tables" />
+    <EntitySet Name="bjf_menu" EntityType="Self.bjf_menu" Schema="powerbjf" store:Type="Tables" />
+    <EntitySet Name="bjf_role" EntityType="Self.bjf_role" Schema="powerbjf" store:Type="Tables" />
+    <EntitySet Name="bjf_roleforuser" EntityType="Self.bjf_roleforuser" Schema="powerbjf" store:Type="Tables" />
+    <EntitySet Name="bjf_user" EntityType="Self.bjf_user" Schema="powerbjf" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

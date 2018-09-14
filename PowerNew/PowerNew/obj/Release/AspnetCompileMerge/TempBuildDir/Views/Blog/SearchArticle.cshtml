@@ -1,0 +1,49 @@
+﻿@using PowerNew.Controllers;
+    @model List<ArticleInfoController.ArticleInfo>
+    @{
+        Layout = "~/Views/Shared/_BlogLayout.cshtml";
+    }
+    <div>
+        @{
+            if (Model.Count <= 0)
+            {
+                <div>
+                    <img class="am-animation-spin am-animation-delay-1 am-img-responsive" src="~/Content/Image/sorry.gif" />
+                </div>
+                <script>
+                    $(function () {
+                        layer.msg("Sorry,没有找到搜索内容");
+                    });
+                </script>
+            }
+            else
+            {
+                foreach (ArticleInfoController.ArticleInfo articleInfo in Model)
+                {
+                    <article class="blog-main">
+                        <h3 class="am-article-title blog-title">
+                            <a href="@Url.Action("Detial", "ArticleInfo")?id=@articleInfo.Id">@articleInfo.ArticleTitle</a>
+                        </h3>
+                        <h4 class="am-article-meta blog-meta">
+                            <span class="am-icon-heart-o"> posted on</span>&nbsp;@articleInfo.PubTime
+                            • under <a href="javascript:void(0);">@articleInfo.ArticleType.Title</a>
+                            • by&nbsp;<a href="javascript:void(0);">@articleInfo.UserInfo.UNickName</a>
+                            • <span class="am-icon-eye">@articleInfo.ReadCount<span>次围观</span></span>
+                        </h4>
+                        <div class="am-g blog-content">
+                            <div class="am-u-lg-7">
+                                @MyHtml.StripHTML(articleInfo.ArticleContent)
+                            </div>
+                            <div class="am-u-lg-5">
+                                <p>
+                                    <img class="am-img-responsive" src="@articleInfo.FacePhoto">
+                                </p>
+                            </div>
+                        </div>
+                    </article>
+                    <hr class="am-article-divider blog-hr">
+                }
+                <ul id="pageBarUl" class="am-pagination blog-pagination">@Html.Raw(ViewBag.pageBar)</ul>
+            }
+        }
+    </div>

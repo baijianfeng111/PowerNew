@@ -1,0 +1,5 @@
+G:\BJF文件集合\单元测试\PowerNew\TaskLearn\bin\Release\TaskLearn.exe.config
+G:\BJF文件集合\单元测试\PowerNew\TaskLearn\bin\Release\TaskLearn.exe
+G:\BJF文件集合\单元测试\PowerNew\TaskLearn\bin\Release\TaskLearn.pdb
+G:\BJF文件集合\单元测试\PowerNew\TaskLearn\obj\Release\TaskLearn.exe
+G:\BJF文件集合\单元测试\PowerNew\TaskLearn\obj\Release\TaskLearn.pdb

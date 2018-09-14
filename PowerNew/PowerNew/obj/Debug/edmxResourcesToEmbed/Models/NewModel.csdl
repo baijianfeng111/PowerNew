@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="RymJiaMeng2014Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Rym_Answer">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="questionid" Type="Int32" />
+    <Property Name="answer" Type="String" MaxLength="800" FixedLength="false" Unicode="true" />
+    <Property Name="isremark" Type="Int32" />
+    <Property Name="isorder" Type="Int32" />
+    <Property Name="isdelete" Type="Int32" />
+    <Property Name="createid" Type="Int32" />
+    <Property Name="createtime" Type="DateTime" Precision="3" />
+    <Property Name="updateid" Type="Int32" />
+    <Property Name="updatetime" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityContainer Name="RymJiaMeng2014Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Rym_Answer" EntityType="Self.Rym_Answer" />
+  </EntityContainer>
+</Schema>

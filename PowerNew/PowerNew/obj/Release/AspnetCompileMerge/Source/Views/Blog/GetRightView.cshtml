@@ -1,0 +1,91 @@
+﻿<div class="am-u-md-4 blog-sidebar" style="margin-top: 20px;">
+    <div class="am-panel-group">
+        <section class="am-panel am-panel-default">
+            <div class="am-panel-hd" data-am-collapse="{target: '#aboutMePanel'}">关于我<span style="float: right">▼</span></div>
+            <div class="am-panel-bd" id="aboutMePanel">
+                <div class="am-g" style="text-align: center; font-size: 15px">
+                    <div class="am-container">
+                        <img src="~/Image/headurl.jpg" alt="..." width="100" height="100" class="am-close-spin am-img-thumbnail am-circle">
+                    </div>
+                    <div class="am-u-sm-12">
+                        <br />
+                        <p>出生在94年</p>
+                        <p>喜欢:编程,LOL</p>
+                        <p>联系方式:</p>
+                        <p>QQ:806078508</p>
+                        <p>贴吧账号:小时光</p>
+                        <a class="am-btn am-btn-success am-btn-sm" href="@Url.Action("AboutMe", "Blog")">查看更多 →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="am-panel am-panel-default">
+            <div class="am-panel-hd" data-am-collapse="{target: '#articleTypePanel'}">文章分类<span style="float: right">▼</span></div>
+            <div class="am-panel-bd" id="articleTypePanel">
+                <ul id="articleTypeTree" class="ztree"></ul>
+            </div>
+        </section>
+        <section class="am-panel am-panel-default">
+            <div class="am-panel-hd" data-am-collapse="{target: '#hotArticlePanel'}">热评文章<span style="float: right">▼</span></div>
+            <!-- 多说热评文章 start -->
+            <style>
+                .ds-top-threads li {
+                    list-style-type: none;
+                }
+            </style>
+            <div class="am-panel-bd" id="hotArticlePanel">
+                <div class="ds-top-threads" data-range="weekly" data-num-items="5"></div>
+            </div>
+
+        </section>
+        <section class="am-panel am-panel-default">
+            <div class="am-panel-hd" data-am-collapse="{target: '#newCommentPanel'}">最新评论<span style="float: right">▼</span></div>
+            <div class="am-panel-bd" id="newCommentPanel">
+                <!-- 多说最新评论 start -->
+                <div class="ds-recent-comments" data-num-items="5" data-show-avatars="1" data-show-time="1" data-show-title="1" data-show-admin="1" data-excerpt-length="70"></div>
+
+            </div>
+        </section>
+        <section class="am-panel am-panel-default">
+            <div class="am-panel-hd" data-am-collapse="{target: '#visitorsPanel'}">这些人排着队来看过我的博客<span style="float: right">▼</span></div>
+            <div class="am-panel-bd" id="visitorsPanel">
+                <ul class="ds-recent-visitors" data-num-items="10"></ul>
+            </div>
+        </section>
+        @*<section class="am-panel am-panel-default">
+                <div class="am-panel-hd" data-am-collapse="{target: '#musicPanel'}">音乐<span style="float: right">▼</span></div>
+                <div class="am-panel-bd" id="musicPanel">
+                    <iframe border="0" marginwidth="0" marginheight="0" width=330 height=110 src="http://music.163.com/outchain/player?type=2&id=28815250&auto=1&height=90"></iframe>
+                </div>
+            </section>*@
+    </div>
+</div>
+<link href="~/Content/metroStyle/metroStyle.css" rel="stylesheet" />
+<script src="~/Scripts/jquery.ztree.all-3.5.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        //$("div[class='am-panel-bd']").collapse('open');
+
+        //文章分类树形图
+        var setting = {
+            data: {
+                simpleData: {
+                    enable: true
+                }
+            },
+            callback: {
+                beforeClick: function(treeId, treeNode) {
+                    if (treeNode.isParent) {
+                        return;
+                    }
+                    location.href = "@Url.Action("Index", "Blog")?typeid=" + treeNode.id + "";
+                }
+            }
+        };
+        var zNodes = @Html.Raw(ViewBag.zNodes);
+        $.fn.zTree.init($("#articleTypeTree"), setting, zNodes);
+
+
+    });
+
+</script>

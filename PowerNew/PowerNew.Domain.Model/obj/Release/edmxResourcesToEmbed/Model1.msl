@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="powerbjfModelStoreContainer" CdmEntityContainer="powerbjfEntities">
+    <EntitySetMapping Name="bjf_roleforuser">
+      <EntityTypeMapping TypeName="powerbjfModel.bjf_roleforuser">
+        <MappingFragment StoreEntitySet="bjf_roleforuser">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="roleid" ColumnName="roleid" />
+          <ScalarProperty Name="userid" ColumnName="userid" />
+          <ScalarProperty Name="isdelete" ColumnName="isdelete" />
+          <ScalarProperty Name="deletetime" ColumnName="deletetime" />
+          <ScalarProperty Name="createtime" ColumnName="createtime" />
+          <ScalarProperty Name="createid" ColumnName="createid" />
+          <ScalarProperty Name="updateid" ColumnName="updateid" />
+          <ScalarProperty Name="updatetime" ColumnName="updatetime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="bjf_block">
+      <EntityTypeMapping TypeName="powerbjfModel.bjf_block">
+        <MappingFragment StoreEntitySet="bjf_block">
+          <ScalarProperty Name="updatetime" ColumnName="updatetime" />
+          <ScalarProperty Name="updateid" ColumnName="updateid" />
+          <ScalarProperty Name="createtime" ColumnName="createtime" />
+          <ScalarProperty Name="createid" ColumnName="createid" />
+          <ScalarProperty Name="deletetime" ColumnName="deletetime" />
+          <ScalarProperty Name="isdelete" ColumnName="isdelete" />
+          <ScalarProperty Name="sortcode" ColumnName="sortcode" />
+          <ScalarProperty Name="isuse" ColumnName="isuse" />
+          <ScalarProperty Name="blockname" ColumnName="blockname" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="bjf_role">
+      <EntityTypeMapping TypeName="powerbjfModel.bjf_role">
+        <MappingFragment StoreEntitySet="bjf_role">
+          <ScalarProperty Name="updatetime" ColumnName="updatetime" />
+          <ScalarProperty Name="updateid" ColumnName="updateid" />
+          <ScalarProperty Name="deletetime" ColumnName="deletetime" />
+          <ScalarProperty Name="isdelete" ColumnName="isdelete" />
+          <ScalarProperty Name="createtime" ColumnName="createtime" />
+          <ScalarProperty Name="createid" ColumnName="createid" />
+          <ScalarProperty Name="isuse" ColumnName="isuse" />
+          <ScalarProperty Name="rolecode" ColumnName="rolecode" />
+          <ScalarProperty Name="rolename" ColumnName="rolename" />
+          <ScalarProperty Name="openid" ColumnName="openid" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="bjf_user">
+      <EntityTypeMapping TypeName="powerbjfModel.bjf_user">
+        <MappingFragment StoreEntitySet="bjf_user">
+          <ScalarProperty Name="updatetime" ColumnName="updatetime" />
+          <ScalarProperty Name="updateid" ColumnName="updateid" />
+          <ScalarProperty Name="createtime" ColumnName="createtime" />
+          <ScalarProperty Name="createid" ColumnName="createid" />
+          <ScalarProperty Name="deletetime" ColumnName="deletetime" />
+          <ScalarProperty Name="isdelete" ColumnName="isdelete" />
+          <ScalarProperty Name="comment" ColumnName="comment" />
+          <ScalarProperty Name="isadmin" ColumnName="isadmin" />
+          <ScalarProperty Name="mobile" ColumnName="mobile" />
+          <ScalarProperty Name="idcard" ColumnName="idcard" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="loginname" ColumnName="loginname" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="openid" ColumnName="openid" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="bjf_menu">
+      <EntityTypeMapping TypeName="powerbjfModel.bjf_menu">
+        <MappingFragment StoreEntitySet="bjf_menu">
+          <ScalarProperty Name="updatetime" ColumnName="updatetime" />
+          <ScalarProperty Name="updateid" ColumnName="updateid" />
+          <ScalarProperty Name="createtime" ColumnName="createtime" />
+          <ScalarProperty Name="createid" ColumnName="createid" />
+          <ScalarProperty Name="deletetime" ColumnName="deletetime" />
+          <ScalarProperty Name="isdelete" ColumnName="isdelete" />
+          <ScalarProperty Name="sortcode" ColumnName="sortcode" />
+          <ScalarProperty Name="isuse" ColumnName="isuse" />
+          <ScalarProperty Name="parentid" ColumnName="parentid" />
+          <ScalarProperty Name="isgroup" ColumnName="isgroup" />
+          <ScalarProperty Name="menuhref" ColumnName="menuhref" />
+          <ScalarProperty Name="blockid" ColumnName="blockid" />
+          <ScalarProperty Name="menucode" ColumnName="menucode" />
+          <ScalarProperty Name="menuname" ColumnName="menuname" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="bjf_loginlog">
+      <EntityTypeMapping TypeName="powerbjfModel.bjf_loginlog">
+        <MappingFragment StoreEntitySet="bjf_loginlog">
+          <ScalarProperty Name="updatetime" ColumnName="updatetime" />
+          <ScalarProperty Name="createtime" ColumnName="createtime" />
+          <ScalarProperty Name="logintime" ColumnName="logintime" />
+          <ScalarProperty Name="userid" ColumnName="userid" />
+          <ScalarProperty Name="ip" ColumnName="ip" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

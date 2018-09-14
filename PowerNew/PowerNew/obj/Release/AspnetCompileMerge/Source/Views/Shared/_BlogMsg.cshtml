@@ -1,0 +1,54 @@
+﻿<div style="border-radius: 20px 20px 20px 20px; height: 50px; margin-top: 70px; background-color: aliceblue">
+    <label style=" line-height: 50px; margin-left :10px;">
+        <span class="am-icon-volume-up"></span><span style="margin-left: 10px;color:red">公告：好消息！！！！</span>
+        <!-- #region 滚动效果 -->
+        @*<script language=JavaScript>
+                //[Step1]: 在此能够更改滚动文本的宽度
+                var MarqueeWidth = 500;
+                //[Step2]: 这里可以改变滚动文本的高度
+                var MarqueeHeight = 10;
+                //[Step3]: 在此能够修改文本滚动的速度，数值大，滚动快 -->
+                var speed = 7;
+                // [Step4]: 这里可以更改滚动文本的颜色 -->
+                // [Step5]: 在此能够修改滚动文本的内容 -->
+                var MarqueeMessage =
+                    '<font face="Arial"  color=#FF0066><strong><big>公告：好消息！！！！</big></strong></font>';
+                document.write('<marquee scrollAmount=' +
+                    speed +
+                    ' style="width:' +
+                    MarqueeWidth +
+                    '">' +
+                    MarqueeMessage +
+                    '</marquee>');
+                function RegLayers() {
+                    if (document.layers) {
+                        setTimeout("window.onresize=RegLayers", 450);
+                        intializemarquee();
+                    }
+                }
+
+                function intializemarquee() {
+                    document.MarqueeText001.document.MarqueeText002.document.write('<nobr>' +
+                        MarqueeMessage +
+                        '</nobr>');
+                    document.MarqueeText001.document.MarqueeText002.document.close();
+                    thelength = document.MarqueeText001.document.MarqueeText002.document.width;
+                    ScrollText();
+                }
+
+
+                function ScrollText() {
+                    if (document.MarqueeText001.document.MarqueeText002.left >= thelength * (-1)) {
+                        document.MarqueeText001.document.MarqueeText002.left -= speed;
+                        setTimeout("ScrollText()", 100);
+                    } else {
+                        document.MarqueeText001.document.MarqueeText002.left = MarqueeWidth;
+                        ScrollText();
+                    }
+                }
+
+                window.onload = RegLayers;
+            </script>*@
+        <!-- #endregion -->
+    </label>
+</div>

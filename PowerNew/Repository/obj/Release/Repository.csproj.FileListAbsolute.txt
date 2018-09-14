@@ -1,0 +1,4 @@
+G:\BJF文件集合\单元测试\PowerNew\Repository\bin\Release\Repository.dll
+G:\BJF文件集合\单元测试\PowerNew\Repository\bin\Release\Repository.pdb
+G:\BJF文件集合\单元测试\PowerNew\Repository\obj\Release\Repository.dll
+G:\BJF文件集合\单元测试\PowerNew\Repository\obj\Release\Repository.pdb

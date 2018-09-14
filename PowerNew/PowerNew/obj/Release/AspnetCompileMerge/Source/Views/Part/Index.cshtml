@@ -1,0 +1,237 @@
+﻿<style type="text/css">
+    .navbar-inner {
+        background: #30649d;
+        background: -moz-linear-gradient(top, #497db6, #30649d);
+        height: 50px;
+        line-height: 50px;
+    }
+
+
+    .menu-tab-list-wrap {
+        float: left;
+        width: 66%;
+        height: 50px;
+        overflow: hidden;
+    }
+
+
+    #menu-tab-list {
+        height: 50px;
+        left: 25px;
+        line-height: 50px;
+        overflow: hidden;
+        float: left;
+        width: 90%;
+        padding-top: 8px;
+    }
+
+        #menu-tab-list ul {
+            height: 100%;
+            list-style: outside none none;
+            margin: 0px;
+            padding: 0;
+            overflow: hidden;
+        }
+
+            #menu-tab-list ul li {
+                color: white;
+                width: 95px;
+                float: left;
+                height: 41px;
+                line-height: 50px;
+                margin-left: 0px;
+                text-align: center;
+            }
+
+
+                #menu-tab-list ul li a {
+                    color: #fff;
+                    font-size: 17px;
+                    font-family: "宋体";
+                    padding: 0px;
+                    background: #00ff7f
+                    font-weight: bold;
+                    text-align: center;
+                    text-decoration: none;
+                    display: block;
+                }
+
+                #menu-tab-list ul li.active a {
+                    color: #3B70A4;
+                    background: #cccccc
+                    padding: 0px;
+                }
+
+                #menu-tab-list ul li a:checked {
+                    background: #3cb371
+                    color: #3B70A4;
+                }
+
+    .menu-tab-prev, .menu-tab-next {
+        cursor: pointer;
+        height: 50px;
+        line-height: 50px;
+        width: 40px;
+    }
+
+    .menu-tab-prev {
+        background: #00fa9a no-repeat 0px 13px;
+    }
+
+    .menu-tab-next {
+        background: #1e90ff no-repeat 0px 13px;
+    }
+
+        .menu-tab-prev:hover, .menu-tab-next:hover {
+            background-position: -1px 12px;
+        }
+
+
+    .scrollbar {
+        background: #ccc none repeat scroll 0 0;
+        height: 1px;
+        line-height: 0;
+        margin: 0;
+        clear: both;
+    }
+
+
+        .scrollbar .handle {
+            background: #292a33 none repeat scroll 0 0;
+            cursor: pointer;
+            height: 100%;
+            width: 100px;
+        }
+
+            .scrollbar .handle .mousearea {
+                height: 20px;
+                left: 0;
+                position: absolute;
+                top: -9px;
+                width: 100%;
+            }
+
+    .controls {
+        margin: 25px 0;
+        text-align: center;
+    }
+</style>
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="navbar-inner">
+        <div class="container-fluid">
+            <a class="visible-lg" style="padding-top: 0;">
+                <img src="~/Image/pic.jpg" style="width:83px;" />
+                <span></span>
+            </a>
+            <div style="float: left;padding-right: 20px;padding-top: 0px;">
+                <img src="~/Image/splite.png" />
+            </div>
+            <button id="menuBtn" type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu-tab-list" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <div class="menu-tab-list-wrap hidden-xs">
+                <div class="scrollbar clearfix">
+                    <div class="handle">
+                        <div class="mousearea"></div>
+                    </div>
+                </div>
+                <div class="menu-tab-prev pull-left"></div>
+                <div id="menu-tab-list" class="frame">
+                    <ul class="clearfix">
+
+                                <li>
+                                    <a href="javascript:">123</a>
+                                </li>
+
+                    </ul>
+                </div>
+                <div class="menu-tab-next pull-right"></div>
+            </div>
+            <ul class="nav navbar-nav user_menu pull-right visible-lg" style="height: 41px;padding-top: 9px;">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <img src="~/Image/user_avatar.png" alt="" class="user_avatar"> <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a id="btnShowUserInfo" href="@Url.Action("ShowInfo", "User", new { Area = "Admin" })">用户资料</a></li>
+                        <li><a id="btnChangePassword" href="@Url.Action("ChangePassword", "User", new { Area = "Admin" })">修改密码</a></li>
+                        <li class="divider"></li>
+                        <li><a href="@Url.Action("Logout", "Manage", new { Area = "Admin" })">注销</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="modal fade" id="myMail">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3 class="modal-title">新消息</h3>
+            </div>
+            <div class="modal-body">
+                <table class="table table-condensed table-striped" data-provides="rowlink">
+                    <thead>
+                        <tr>
+                            <th>发件人</th>
+                            <th>标题</th>
+                            <th>日期</th>
+                            <th>状态</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>微信</td>
+                            <td><a href="javascript:void(0)">测试邮件，模块正在开发中...</a></td>
+                            <td>2014-2-10</td>
+                            <td>已读</td>
+                        </tr>
+                        <tr>
+                            <td>微信</td>
+                            <td><a href="javascript:void(0)">测试邮件，模块正在开发中...</a></td>
+                            <td>2014-2-10</td>
+                            <td>已读</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default">查看详情</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="myTasks">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3 class="modal-title">开发计划</h3>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-info">该模块正在紧张开发中.</div>
+                <table class="table table-condensed table-striped" data-provides="rowlink">
+                    <thead>
+                        <tr>
+                            <th>编号</th>
+                            <th>描述信息</th>
+                            <th>更新时间</th>
+                            <th>优先级</th>
+                            <th>状态</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default">查看详情</button>
+            </div>
+        </div>
+    </div>
+</div>

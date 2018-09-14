@@ -1,0 +1,160 @@
+﻿
+
+<style>
+    div, ul, li {
+        margin: 0;
+        padding: 0;
+    }
+    /*先初始化一下默认样式*/
+    a {
+        text-decoration: none;
+        color: #222;
+    }
+
+    .notice {
+        width: 50%;
+        font-size: 16px;
+        line-height: 50px;
+        height: 50px;
+        overflow: hidden;
+        margin-left: 10px;
+    }
+
+
+        .notice ul li {
+            list-style: none;
+            line-height: 50px;
+            display: block;
+            margin-left: 80px;
+        }
+
+
+        .notice a {
+            float: left;
+            display: inline-block;
+            width: 70%;
+            margin-left: 20px;
+            text-decoration: none;
+        }
+
+
+            .notice a:first-child {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+
+
+            .notice a span {
+                color: #999;
+                font-size: 12px;
+                margin-right: 10px;
+            }
+
+
+    .more {
+        position: absolute;
+        line-height: 50px;
+        font-size: 12px;
+        color: #ff9900;
+    }
+
+
+    .new-notice {
+        margin-left: 5px;
+        position: absolute;
+        line-height: 50px;
+        color: #228b22;
+        font-size: 18px;
+        font-weight: bolder;
+        font-family: 微软雅黑;
+    }
+</style>
+<div style="border-radius: 20px 20px 20px 20px; height: 50px; margin-top: 70px; background-color: aliceblue">
+
+    <span class="am-icon-volume-up new-notice" style="float: left">最新公告:</span>
+    <div class="notice" style="float: left">
+        <ul>
+            <li>
+                <a href="#">
+                    nice to meet you
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    我的博客马上就要上线了，请大家持续关注哦！
+                </a>
+            </li>
+        </ul>
+    </div>
+    <a href="#" class="more" style="float: left">更多公告>></a>
+    @*<label style="line-height: 50px; margin-left: 10px;"> </label>*@
+    @*<span class="am-icon-volume-up"></span><span style="margin-left: 10px;color:red">公告：好消息！！！！</span>*@
+    <!-- #region 滚动效果 -->
+    @*<script language=JavaScript>
+            //[Step1]: 在此能够更改滚动文本的宽度
+            var MarqueeWidth = 500;
+            //[Step2]: 这里可以改变滚动文本的高度
+            var MarqueeHeight = 10;
+            //[Step3]: 在此能够修改文本滚动的速度，数值大，滚动快 -->
+            var speed = 7;
+            // [Step4]: 这里可以更改滚动文本的颜色 -->
+            // [Step5]: 在此能够修改滚动文本的内容 -->
+            var MarqueeMessage =
+                '<font face="Arial"  color=#FF0066><strong><big>公告：好消息！！！！</big></strong></font>';
+            document.write('<marquee scrollAmount=' +
+                speed +
+                ' style="width:' +
+                MarqueeWidth +
+                '">' +
+                MarqueeMessage +
+                '</marquee>');
+            function RegLayers() {
+                if (document.layers) {
+                    setTimeout("window.onresize=RegLayers", 450);
+                    intializemarquee();
+                }
+            }
+
+            function intializemarquee() {
+                document.MarqueeText001.document.MarqueeText002.document.write('<nobr>' +
+                    MarqueeMessage +
+                    '</nobr>');
+                document.MarqueeText001.document.MarqueeText002.document.close();
+                thelength = document.MarqueeText001.document.MarqueeText002.document.width;
+                ScrollText();
+            }
+
+
+            function ScrollText() {
+                if (document.MarqueeText001.document.MarqueeText002.left >= thelength * (-1)) {
+                    document.MarqueeText001.document.MarqueeText002.left -= speed;
+                    setTimeout("ScrollText()", 100);
+                } else {
+                    document.MarqueeText001.document.MarqueeText002.left = MarqueeWidth;
+                    ScrollText();
+                }
+            }
+
+            window.onload = RegLayers;
+        </script>*@
+    <!-- #endregion -->
+
+</div>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript">
+    function noticeUp(obj, top, time) {
+        $(obj).animate({
+            marginTop: top
+        },
+            time,
+            function () {
+                $(this).css({ marginTop: "0" }).find(":first").appendTo(this);
+            });
+    };
+
+    $(function () {
+        // 调用 公告滚动函数
+        setInterval("noticeUp('.notice ul','-35px',500)", 4000);
+    });
+</script>

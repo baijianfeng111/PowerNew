@@ -1,0 +1,268 @@
+﻿@*@{
+        Layout = null;
+    }
+
+    <!DOCTYPE html>
+
+    <html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>爬虫DEMO</title>
+    </head>
+    <body style="font-size: 16px; width: 100%; margin: 0 auto">
+        <div class="container">
+            <div class="row">
+                <div class="form-group" style="margin-top: 20px;">
+                    <input id="url" value="" class="control-label" />
+                    <a class="btn btn-info" href="javascript:void(0)" id="look"><i class="glyphicon glyphicon-plus"></i>获取数据</a>
+                </div>
+            </div>
+        </div>
+        <div id="showhtml" class="container">
+            @ViewBag.a
+        </div>
+        <script src="~/Content/js/jquery.min.js"></script>
+        <script type="text/javascript">
+            $(function () {
+
+                $("#look").click(function () {
+                    var urlAction = "@Url.Action("GetHttpSource")";
+                    var url = $("#url").val();
+                    $.post(urlAction, { url: url }, function (result) {
+                            //alert(result.data);
+                            $("#showhtml").html(result.data);
+                        });
+                });
+            });
+        </script>
+    </body>
+    </html>*@
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap.min.js"></script>
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=1.3"></script>
+</head>
+<body>
+    <div class="container">
+        <span id="qqLoginBtn"></span>
+    </div>
+
+    @*<script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" data-appid="***" data-redirecturi="***" charset="utf-8"></script>
+
+        <script src="http://api.map.baidu.com/api?v=2.0&ak=s6vFvPKgaEnI2ImqBpKGDj0m"></script>*@
+
+    <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.3&key=d19f258dc8795d8db36e272c7e0684a5"></script>
+    <script type="text/javascript">
+        $(function () {
+
+            getCurrentPosition();
+            return;
+
+
+            var geolocation = new BMap.Geolocation();
+            geolocation.getCurrentPosition(function (r) {
+                if (this.getStatus() == BMAP_STATUS_SUCCESS) {
+                    alert('您的位置：' + r.point.lng + ',' + r.point.lat);
+                }
+                else {
+                    alert('failed' + this.getStatus());
+                }
+            });
+
+            @*$("#btnpb").click(function() {
+            //$(this).button('loading');
+            var url = "@Url.Action("Pub")";
+            $.post(url,
+                function(result) {
+                    if (result.state == 0) {
+                        alert(result.msg);
+                    } else {
+                        alert(result.msg);
+                    }
+                    //$(this).button('reset');
+                });
+        });*@
+        });
+
+
+        //function getLocation() {
+        //    if (navigator.geolocation) {
+        //        navigator.geolocation.getCurrentPosition(showPosition1, showError);
+        //    } else {
+        //        alert("浏览器不支持地理定位。");
+        //    }
+        //}
+
+
+        //function showError(error) {
+        //    switch (error.code) {
+        //    case error.PERMISSION_DENIED:
+        //        alert("定位失败,用户拒绝请求地理定位");
+        //        break;
+        //    case error.POSITION_UNAVAILABLE:
+        //        alert("定位失败,位置信息是不可用");
+        //        break;
+        //    case error.TIMEOUT:
+        //        alert("定位失败,请求获取用户位置超时");
+        //        break;
+        //    case error.UNKNOWN_ERROR:
+        //        alert("定位失败,定位系统失效");
+        //        break;
+        //    }
+        //}
+
+
+        //function showPosition(position) {
+        //    var latlon = position.coords.latitude + ',' + position.coords.longitude;
+
+        //    //baidu
+        //    //var url = "<a href="http://api.map.baidu.com/geocoder/v2/?ak=C93b5178d7a8ebdb830b9b557abce78b&callback=renderReverse&location="+latlon+"&output=json&pois=0">http:////api.map.baidu.com/geocoder/v2/?ak=C93b5178d7a8ebdb830b9b557abce78b&callback=renderReverse&location="+latlon+"&output=json&pois=0</a>";
+
+        //    var url =
+        //        "http://api.map.baidu.com/geocoder/v2/?ak=C93b5178d7a8ebdb830b9b557abce78b&callback=renderReverse&location=" +
+        //            latlon +
+        //            "&output=json&pois=0";
+        //    $.ajax({
+        //        type: "GET",
+        //        dataType: "jsonp",
+        //        url: url,
+        //        beforeSend: function() {
+        //            $("#baidu_geo").html('正在定位...');
+        //        },
+        //        success: function(json) {
+        //            if (json.status === 0) {
+        //                $("#baidu_geo").html(json.result.formatted_address);
+        //            }
+        //        },
+        //        error: function(XMLHttpRequest, textStatus, errorThrown) {
+        //            $("#baidu_geo").html(latlon + "地址位置获取失败");
+        //        }
+        //    });
+        //}
+
+        //function login() {
+        //    //qq登录
+        //    QC.Login({
+        //        btnId: "qqLoginBtn",    //插入按钮的节点id
+        //        //用户需要确认的scope授权项，可选，默认all
+        //        scope: "all",
+        //        //按钮尺寸，可用值[A_XL| A_L| A_M| A_S|  B_M| B_S| C_S]，可选，默认B_S
+        //        size: "A_M"
+        //    });
+
+        //    //从页面收集OpenAPI必要的参数。get_user_info不需要输入参数，因此paras中没有参数
+        //    var paras = {};
+
+        //    //用JS SDK调用OpenAPI
+        //    QC.api("get_user_info", paras)
+        //        //指定接口访问成功的接收函数，s为成功返回Response对象
+        //        .success(function (s) {
+        //            //成功回调，通过s.data获取OpenAPI的返回数据
+        //            $.ajax({
+        //                type: "POST",
+        //                url: "../../../Ajax/WebServiceHandler.aspx/QQUserLogin", // 调动后台页面方法
+        //                contentType: "application/json; charset=utf-8",
+        //                dataType: "json",
+        //                data: '{"strLoginName":"' + s.data.nickname + '"}',
+        //                success: function (data) {
+        //                    var strReturn = data.d;
+        //                    if (strReturn == "fail") {
+        //                        QC.Login.signOut();
+        //                    }
+        //                    else {
+        //                        alert("QQ登录成功");
+        //                    }
+        //                },
+        //                error: function (err) {
+        //                    QC.Login.signOut();
+        //                }
+        //            });
+        //        })
+        //        //指定接口访问失败的接收函数，f为失败返回Response对象
+        //        .error(function (f) {
+        //            //失败回调
+        //            alert("获取用户信息失败！");
+        //        })
+        //        //指定接口完成请求后的接收函数，c为完成请求返回Response对象
+        //        .complete(function (c) {
+        //            //完成请求回调
+        //            //alert("获取用户信息完成！");
+        //        });
+        //};
+
+        function getCurrentPosition() {//调用浏览器定位服务
+            map = new AMap.Map('container', {
+                resizeEnable: true
+            });
+            map.plugin('AMap.Geolocation', function () {
+                geolocation = new AMap.Geolocation({
+                    enableHighAccuracy: true, //是否使用高精度定位，默认:true
+                    timeout: 10000, //超过10秒后停止定位，默认：无穷大
+                    buttonOffset: new AMap.Pixel(10, 20), //定位按钮与设置的停靠位置的偏移量，默认：Pixel(10, 20)
+                    zoomToAccuracy: true, //定位成功后调整地图视野范围使定位位置及精度范围视野内可见，默认：false
+                    buttonPosition: 'RB'
+                });
+                map.addControl(geolocation);
+                geolocation.getCurrentPosition();
+                AMap.event.addListener(geolocation, 'complete', onComplete);
+                //返回定位信息
+                AMap.event.addListener(geolocation, 'error', onError);
+                //返回定位出错信息
+            });
+        };
+        function onComplete(data) {
+            map = new AMap.Map('container', {
+                resizeEnable: true,
+                zoom: 14,
+                center: [data.position.getLng(), data.position.getLat()]
+            });
+            marker = new AMap.Marker({
+                position: [data.position.getLng(), data.position.getLat()],
+                map: map
+            });
+            posX = data.position.getLng();
+            poxY = data.position.getLat();
+            geocoder(data.position.getLng(), data.position.getLat(), data.addressComponent.citycode);
+
+        };
+        function onError(data) {//解析定位错误信息
+            mobile.window.alert({
+                title: '提示信息',
+                content: '获取定位信息失败！',
+                buttons: '确定'
+            });
+            $("#nowAddress").html("定位失败");
+            var str = '<p>定位失败</p>';
+            switch (data.info) {
+                case 'PERMISSION_DENIED':
+                    str += '浏览器阻止了定位操作';
+                    break;
+                case 'POSITION_UNAVAILBLE':
+                    str += '无法获得当前位置';
+                    break;
+                case 'TIMEOUT':
+                    str += '定位超时';
+                    break;SS
+                default:
+                    str += '未知错误';
+                    break;
+            }
+        };
+        function geocoder(lnglatX, lnglatY, cityCode) {
+            alert("x:" + lnglatX + ",y:" + lnglatY);
+        }
+    </script>
+</body>
+</html>

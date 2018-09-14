@@ -1,0 +1,184 @@
+﻿@using PowerNew.Common
+@model PowerNew.Model.bjf_account
+@{
+    var title = Model.id == 0 ? "添加客户" : "修改客户";
+}
+<div class="container">
+    <div class="row">
+        <div class="form-group" style="margin-top: 20px;">
+            <span style="font-size: 20px;margin-left: 5%"><i class="glyphicon glyphicon-plus"></i>@title</span>
+            <a class="btn btn-info" id="btnsave" data-loading-text="正在保存..." style="margin-left: 40%"><i class="glyphicon glyphicon-floppy-disk"></i>保存</a>
+            <a class="btn btn-info" href="@Url.Action("Index")"><i class="glyphicon glyphicon-export"></i>返回</a>
+        </div>
+    </div>
+
+    <hr class="hr1">
+    <div class="row">
+        <div class="col-xs-12 col-md-8 col-lg-12" style="margin-top: 10px;">
+            <form id="form1" class="form-horizontal" method="POST" action="@Url.Action("SubmitSave")" novalidate="novalidate">
+                <input type="hidden" name="id" value="@Model.id" />
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label" for="name"><span class="f_req">*</span>客户名称：</label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" id="name" name="name" value="@Model.name">
+                    </div>
+                    <div class="col-sm-4">
+                        <span class="help-block form-control-static"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label" for="mobile"><span class="f_req">*</span>手机号：</label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" id="mobile" name="mobile" value="@EncryAndDecryptHelper.Decryption(Model.mobile)">
+                    </div>
+                    <div class="col-sm-4">
+                        <span class="help-block form-control-static"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label" for="domainshortname"><span class="f_req">*</span>域名：</label>
+                    <div class="col-sm-5">
+                        <div class="input-group">
+                            <span class="input-group-addon">i.</span>
+                            <input type="text" class="form-control" id="domainshortname" name="domainshortname" value="@Model.domainshortname">
+                            <span class="input-group-addon">.login.com</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <span class="help-block form-control-static"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label" for="dbserver"><span class="f_req">*</span>数据库地址：</label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" id="dbserver" name="dbserver" value="@Model.dbserver">
+                    </div>
+                    <div class="col-sm-4">
+                        <span class="help-block form-control-static"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label" for="dbuserid"><span class="f_req">*</span>数据库账号：</label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" id="dbuserid" name="dbuserid" value="@Model.dbuserid">
+                    </div>
+                    <div class="col-sm-4">
+                        <span class="help-block form-control-static"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label" for="dbpassword"><span class="f_req">*</span>数据库密码：</label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" id="dbpassword" name="dbpassword" value="@EncryAndDecryptHelper.Decryption(Model.dbpassword)">
+                    </div>
+                    <div class="col-sm-4">
+                        <span class="help-block form-control-static"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label" for="dbname"><span class="f_req">*</span>数据库名称：</label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" id="dbname" name="dbname" value="@Model.dbname">
+                    </div>
+                    <div class="col-sm-4">
+                        <span class="help-block form-control-static"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label" for="comment">备注：</label>
+                    <div class="col-sm-5">
+                        <textarea class="form-control" id="comment" name="comment">@Model.comment</textarea>
+                    </div>
+                    <div class="col-sm-4">
+                        <span class="help-block form-control-static"></span>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+
+    $("#btnsave").click(function () {
+        $("#form1").validate({
+            rules: {
+                name: {
+                    required: true
+                },
+                mobile: {
+                    required: true
+                },
+                domainshortname: {
+                    required: true
+                },
+                dbserver: {
+                    required: true
+                },
+                dbuserid: {
+                    required: true
+                },
+                dbpassword: {
+                    required: true
+                },
+                dbname: {
+                    required: true
+                }
+            },
+
+            messages: {
+                name: {
+                    required: "客户名不能为空"
+                },
+                mobile: {
+                    required: "手机号不能为空"
+                },
+                domainshortname: {
+                    required: "域名不能为空"
+                },
+                dbserver: {
+                    required: "数据库地址不能为空"
+                },
+                dbuserid: {
+                    required: "数据库账号不能为空"
+                },
+                dbpassword: {
+                    required: "数据库密码不能为空"
+                },
+                dbname: {
+                    required: "数据库名称不能为空"
+                }
+            },
+
+            errorClass: "error",
+            success: 'valid',
+            unhighlight: function (element, errorClass, validClass) { //验证通过
+                $(element).tooltip('destroy').removeClass(errorClass);
+            },
+            errorPlacement: function (error, element) {
+                if ($(element).next("div").hasClass("tooltip")) {
+                    $(element).attr("data-placement", "right");
+                    $(element).attr("data-original-title", $(error).text()).tooltip("show");
+                } else {
+                    $(element).attr("title", $(error).text()).tooltip("show");
+                }
+            },
+
+
+            submitHandler: function () {
+                $("#btnsave").button('loading');
+                $("form:first").ajaxSubmit(function (result) {
+                    if (result.state == 0) {
+                        alert(result.msg);
+                        $("#btnsave").button('reset');
+                        window.location.href = "@Url.Action("Index")";
+                    } else { alert(result.msg); $("#btnsave").button('reset'); }
+                });
+            }
+        });
+        $("form:first").submit();
+
+    });
+</script>

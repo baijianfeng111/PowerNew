@@ -1,0 +1,21 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+#table-area tr td {
+    vertical-align: middle;
+}
+
+.hr1 {
+    width: 100%;
+    margin: 0 auto;
+    color: black;
+    margin-top: 10px;
+}
+
+.f_req {
+    font-size: 13px;
+    color: #ff0000;
+    font-family: helvetica, arial, sans-serif;
+}

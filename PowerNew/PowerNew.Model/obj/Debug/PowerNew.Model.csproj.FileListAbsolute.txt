@@ -1,0 +1,16 @@
+G:\BJF文件集合\单元测试\PowerNew\PowerNew.Model\bin\Debug\PowerNew.Model.dll.config
+G:\BJF文件集合\单元测试\PowerNew\PowerNew.Model\bin\Debug\PowerNew.Model.dll
+G:\BJF文件集合\单元测试\PowerNew\PowerNew.Model\bin\Debug\PowerNew.Model.pdb
+G:\BJF文件集合\单元测试\PowerNew\PowerNew.Model\bin\Debug\EntityFramework.dll
+G:\BJF文件集合\单元测试\PowerNew\PowerNew.Model\bin\Debug\EntityFramework.SqlServer.dll
+G:\BJF文件集合\单元测试\PowerNew\PowerNew.Model\bin\Debug\MySql.Data.Entity.EF5.dll
+G:\BJF文件集合\单元测试\PowerNew\PowerNew.Model\bin\Debug\MySql.Data.Entity.EF6.dll
+G:\BJF文件集合\单元测试\PowerNew\PowerNew.Model\bin\Debug\EntityFramework.xml
+G:\BJF文件集合\单元测试\PowerNew\PowerNew.Model\bin\Debug\EntityFramework.SqlServer.xml
+G:\BJF文件集合\单元测试\PowerNew\PowerNew.Model\bin\Debug\MySql.Data.Entity.EF5.xml
+G:\BJF文件集合\单元测试\PowerNew\PowerNew.Model\bin\Debug\MySql.Data.Entity.EF6.xml
+G:\BJF文件集合\单元测试\PowerNew\PowerNew.Model\bin\Debug\zh-Hans\EntityFramework.resources.dll
+G:\BJF文件集合\单元测试\PowerNew\PowerNew.Model\bin\Debug\zh-Hans\EntityFramework.SqlServer.resources.dll
+G:\BJF文件集合\单元测试\PowerNew\PowerNew.Model\obj\Debug\PowerNew.Model.dll
+G:\BJF文件集合\单元测试\PowerNew\PowerNew.Model\obj\Debug\PowerNew.Model.pdb
+G:\BJF文件集合\单元测试\PowerNew\PowerNew.Model\obj\Debug\PowerNew.Model.csprojResolveAssemblyReference.cache

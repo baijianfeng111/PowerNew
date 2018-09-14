@@ -1,0 +1,15 @@
+G:\BJF文件集合\单元测试\PowerNew\PowerNew.Domain.Model\bin\Debug\PowerNew.Domain.Model.dll.config
+G:\BJF文件集合\单元测试\PowerNew\PowerNew.Domain.Model\bin\Debug\PowerNew.Domain.Model.dll
+G:\BJF文件集合\单元测试\PowerNew\PowerNew.Domain.Model\bin\Debug\PowerNew.Domain.Model.pdb
+G:\BJF文件集合\单元测试\PowerNew\PowerNew.Domain.Model\bin\Debug\EntityFramework.dll
+G:\BJF文件集合\单元测试\PowerNew\PowerNew.Domain.Model\bin\Debug\EntityFramework.SqlServer.dll
+G:\BJF文件集合\单元测试\PowerNew\PowerNew.Domain.Model\bin\Debug\MySql.Data.Entity.EF6.dll
+G:\BJF文件集合\单元测试\PowerNew\PowerNew.Domain.Model\bin\Debug\Newtonsoft.Json.dll
+G:\BJF文件集合\单元测试\PowerNew\PowerNew.Domain.Model\bin\Debug\EntityFramework.xml
+G:\BJF文件集合\单元测试\PowerNew\PowerNew.Domain.Model\bin\Debug\EntityFramework.SqlServer.xml
+G:\BJF文件集合\单元测试\PowerNew\PowerNew.Domain.Model\bin\Debug\MySql.Data.Entity.EF6.xml
+G:\BJF文件集合\单元测试\PowerNew\PowerNew.Domain.Model\bin\Debug\Newtonsoft.Json.xml
+G:\BJF文件集合\单元测试\PowerNew\PowerNew.Domain.Model\bin\Debug\zh-Hans\EntityFramework.resources.dll
+G:\BJF文件集合\单元测试\PowerNew\PowerNew.Domain.Model\bin\Debug\zh-Hans\EntityFramework.SqlServer.resources.dll
+G:\BJF文件集合\单元测试\PowerNew\PowerNew.Domain.Model\obj\Debug\PowerNew.Domain.Model.dll
+G:\BJF文件集合\单元测试\PowerNew\PowerNew.Domain.Model\obj\Debug\PowerNew.Domain.Model.pdb

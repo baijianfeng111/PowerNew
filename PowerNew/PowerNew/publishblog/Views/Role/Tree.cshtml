@@ -1,0 +1,125 @@
+﻿@model PowerNew.Model.bjf_role
+@{
+    var title = "分配角色";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="form-group" style="margin-top: 20px;">
+            <span style="font-size: 20px;margin-left: 5%"><i class="glyphicon glyphicon-plus"></i>@title</span>
+            <a class="btn btn-info" id="btnsave" data-loading-text="正在保存..." style="margin-left: 40%"><i class="glyphicon glyphicon-floppy-disk"></i>保存</a>
+            <a class="btn btn-info" href="@Url.Action("Index")"><i class="glyphicon glyphicon-export"></i>返回</a>
+            @*<a class="btn btn-info" id="btnlook"><i class="glyphicon glyphicon-export"></i>查看</a>*@
+        </div>
+    </div>
+
+    <hr class="hr1">
+    <div class="row">
+        <form id="form1" class="form-horizontal">
+            <input type="hidden" name="roleid" id="roleid" value="@Model.id">
+            <div class="form-group">
+                <label class="col-sm-2 control-label" style="text-align: left"><span class="f_req"></span>角色名称：@Model.rolename</label>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label" style="text-align: left"><span class="f_req"></span>权限资源树：</label>
+                <div class="col-sm-5" style="font-size: 28px;">
+                    <ul id="treeAuth" class="ztree"></ul>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<link href="~/Content/zTree/css/zTreeStyle/zTreeStyle.css" rel="stylesheet" />
+<script src="~/Content/zTree/js/jquery.ztree.core-3.5.js"></script>
+<script src="~/Content/zTree/js/jquery.ztree.excheck-3.5.js"></script>
+<script type="text/javascript">
+
+    $(function () {
+        //创建树结构
+        showTree();
+        //保存
+        $("#btnsave").click(function () {
+            $(this).button('loading');
+            var zTree = $.fn.zTree.getZTreeObj("treeAuth");//获取zTree对象
+            var list = zTree.getCheckedNodes(true);        //找到选中的节点
+            var cs = [];
+            for (var check in list) {
+                var item = list[check];
+                cs.push({
+                    id: item.id,
+                    name: item.name,
+                    isparent: item.isParent,
+                    sortCode: item.sortCode,
+                    linkUrl: item.linkUrl
+                });
+            }
+            var roleid = $("#roleid").val();
+            var obj = new Object();
+            obj.roleid = roleid;
+            obj.list = cs;
+
+            //序列化参数提交
+            var m = JSON.stringify(obj);
+            $.ajax({
+                url: "@Url.Action("SaveAuth","Role")",
+                type: "POST",
+                dataType: "json",
+                contentType: "application/json",
+                data: m,
+                success: function (result) {
+                    if (result.state == 0) {
+                        alert(result.msg);
+                        window.location.href = "@Url.Action("Index")";
+                    } else {
+                        alert(result.msg);
+                    }
+                    $("#btnsave").button('reset');
+                }
+            });
+        });
+    });
+
+
+    //创建树结构
+    function showTree() {
+        var zTreeObj;
+
+        var setting = {
+            check: {                 //单选样式
+                enable: true
+            },
+            data: {
+                key: {
+                    title: "name",
+                    checked: "Checked"
+                },
+                simpleData: {
+                    enable: false
+                }
+            },
+            callback: {
+                onClick: selectNode
+            }
+
+
+        };
+
+        function createTree() {
+            var roleid = $("#roleid").val();
+
+            var url = "@Url.Action("GetTreeJson")";
+            $.post(url, { roleid: roleid }, function (result) {
+                zTreeObj = $.fn.zTree.init($("#treeAuth"), setting, result.data);
+            });
+        }
+
+
+        function selectNode(event, treeId, treeNode, clickFlag) {
+            //alert(JSON.stringify(treeNode) + "\n" + "\n" + "\n" + "\n");
+        }
+
+        createTree();
+
+    }
+</script>

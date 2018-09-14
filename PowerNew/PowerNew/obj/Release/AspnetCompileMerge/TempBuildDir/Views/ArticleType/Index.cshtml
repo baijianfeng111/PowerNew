@@ -1,0 +1,138 @@
+﻿@model PowerNew.Common.PagerResult<PowerNew.Model.bjf_menu>
+@{
+    ViewBag.Title = "博客文章分类";
+}
+
+<link href="~/Content/jquery.fancytree/skin-win8/ui.fancytree.css" rel="stylesheet" />
+<style type="text/css">
+    .table td {
+        text-align: left;
+    }
+
+        .table td.alignCenter {
+            text-align: center;
+        }
+
+    span.fancytree-icon {
+        display: none;
+    }
+</style>
+<div class="" style="width:100%;margin:0 auto">
+    <div class="form-group">
+        <div><h3 class="col-sm-2" style="margin-top: 5px;"><i class="glyphicon glyphicon-tag"></i>@ViewBag.Title</h3></div>
+        <div class="form-group" style="margin-top: 10px;">
+            <a class="btn btn-info" href="@Url.Action("Index")"><i class="glyphicon glyphicon-refresh"></i>刷新</a>
+            <a class="btn btn-info" href="@Url.Action("Create")"><i class="glyphicon glyphicon-plus"></i>添加</a>
+        </div>
+        <hr>
+    </div>
+
+    <div id="table-category" class="table-responsive">
+        <table id="treetable" class="table table-bordered table-striped" style="width: 100%">
+            <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>分类名称</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <div id="showmsg"></div>
+    <script id="NodeList" type="text/x-jsrender">
+        <a class="btn btn-xs btn-link" href="@Url.Action("Edit")?id={{:id}}" onclick="showBox(this); return false;">编辑</a>
+        <a id={{:id}} class="btn btn-xs btn-link" onclick="deleteNode(this); return false;">删除</a>
+    </script>
+</div>
+
+@Scripts.Render("~/js/jqueryui")
+@Scripts.Render("~/js/jsrender")
+<script type="text/javascript">
+    function deleteNode(obj) {
+        var id = $(obj).attr('id');
+        if (id == "") {
+            alert("参数值不能为空！");
+            return;
+        }
+        $.post("@Url.Action("IsParent")", { id: id }, function (result) {
+            if (result.state === 0) {   //0表示子类
+                if (!window.confirm("确定要删除吗？")) return;
+                Delete(id);
+            } else {
+                if (!window.confirm("该类是父类，删除后对应子类也要删除，确定要删除吗？")) return;
+                Delete(id);
+            }
+        });
+    }
+
+    function reloadTreeTable() {
+        var url = "@Url.Action("Tree")";
+
+        try {
+            $("#treetable").fancytree("destroy"); //先销毁
+        } catch (e) {
+        }
+
+        $("#treetable").fancytree({
+            extensions: ["table"],
+            clickFolderMode: 1,
+            checkbox: false,
+            table: {
+                indentation: 20,
+                nodeColumnIdx: 1
+            },
+            source: {
+                url: url
+            },
+
+            lazyload: function (e, data) {
+
+            },
+            renderColumns: function (e, data) {
+                var node = data.node;
+                var $tdList = $(node.tr).find(">td");
+                $tdList.eq(0).text(node.getIndexHier()).addClass("alignLeft");
+                $tdList.eq(1).text(node.data.title).addClass("alignLeft");
+                var id = node.data.Id;
+                var parentId = node.data.ParentId;
+                var isShowButton = node.data.IsAddButtonForNextLevel;
+                var addUrl = '@Url.Action("Create")';
+                var btnAddHtml = "";
+                if (isShowButton) {
+                    btnAddHtml = "<a href='" + addUrl + "?parentid=" + id + "' class='btn btn-xs btn-link' >添加下级</a>";
+                } else {
+                    btnAddHtml = "<a href='#'></a>";
+                }
+                var html = $("#NodeList").render({ id: id, parentId: parentId, isShowButton: isShowButton, btnAddHtml: btnAddHtml });
+                $tdList.eq(2).html(html + btnAddHtml);
+                $tdList.eq(2).addClass("alignLeft");
+            }
+        });
+    }
+
+    function SetBoxFinished() {
+        $.colorbox.close();
+        reloadTreeTable();
+    }
+
+    //加载树类型
+    $(function () {
+        reloadTreeTable();
+    });
+
+
+    //删除
+    function Delete(id) {
+        var url = "@Url.Action("Delete")?id=" + id;
+        $.post(url, function (data) {
+            if (data.state === 1) {
+                alert(data.msg);
+                reloadTreeTable();
+            } else {
+                alert(data.msg);
+            }
+        });
+    }
+
+</script>

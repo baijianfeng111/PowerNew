@@ -1,0 +1,181 @@
+﻿@using PowerNew.Bll
+@model PowerNew.Model.bjf_menu
+@{
+    var title = Model.id == 0 ? "添加菜单" : "修改菜单";
+}
+<div class="container">
+    <div class="row">
+        <div class="form-group" style="margin-top: 20px;">
+            <span style="font-size: 20px;margin-left: 5%"><i class="glyphicon glyphicon-plus"></i>@title</span>
+            <a class="btn btn-info" id="btnsave" data-loading-text="正在保存..." style="margin-left: 40%"><i class="glyphicon glyphicon-floppy-disk"></i>保存</a>
+            <a class="btn btn-info" href="@Url.Action("Index")"><i class="glyphicon glyphicon-export"></i>返回</a>
+        </div>
+    </div>
+
+    <hr class="hr1">
+    <div class="row">
+        <div class="col-xs-12 col-md-8 col-lg-12" style="margin-top: 10px;">
+            <form id="form1" class="form-horizontal" method="POST" action="@Url.Action("SubmitSave")" novalidate="novalidate">
+                <input type="hidden" name="id" value="@Model.id" />
+                <div class="form-group">
+                    <label class="col-sm-2 control-label"><span class="f_req">*</span>菜单名称：</label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" value="@Model.menuname" name="menuname">
+                    </div>
+                    <div class="col-sm-4">
+                        <span class="help-block form-control-static"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label"><span class="f_req">*</span>菜单编码：</label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" value="@Model.menucode" name="menucode">
+                    </div>
+                    <div class="col-sm-4">
+                        <span class="help-block form-control-static"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label"><span class="f_req"></span>菜单类型：</label>
+                    <div class="col-sm-2">
+                        <label class="control-label">@Html.CheckBox("isgroup", Model.isgroup)是否是菜单组</label>
+                    </div>
+                    <div class="col-sm-4">
+                        <span class="help-block form-control-static"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label"><span class="f_req">*</span>所属模块：</label>
+                    <div class="col-sm-5">
+                        @Html.DropDownList("blockid", SelectListCenter.GetBlockSelectList(Model.blockid), new { @class = "form-control" })
+                    </div>
+                    <div class="col-sm-4">
+                        <span class="help-block form-control-static"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label"><span class="f_req"></span>菜单组：</label>
+                    <div class="col-sm-5">
+                        @Html.DropDownList("parentid", SelectListCenter.GetGroupMenuSelectList(Model.parentid), new { @class = "form-control" })
+                    </div>
+                    <div class="col-sm-4">
+                        <span class="help-block form-control-static"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label"><span class="f_req"></span>资源地址：</label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" value="@Model.menuhref" name="menuhref">
+                    </div>
+                    <div class="col-sm-4">
+                        <span class="help-block form-control-static"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label"><span class="f_req">*</span>是否启用：</label>
+                    <div class="col-sm-5">
+                        @{
+                            var newlist = new List<SelectListItem> {
+                                new SelectListItem {Text = "启用", Value = "0"},
+                                new SelectListItem {Text = "禁用", Value = "1"}
+                            };
+                            foreach (var item in newlist)
+                            {
+                                if ((Model.id > 0 && Model.isuse == false) || Convert.ToInt32(item.Value) == 0)
+                                {
+                        <label class="control-label">
+                            <input type="radio" checked="checked" name="isuse" value="@item.Value" />
+                            <span>@item.Text</span>
+                        </label>
+                                }
+                                else
+                                {
+                        <label class="control-label">
+                            <input type="radio" name="isuse" value="@item.Value" />
+                            <span>@item.Text</span>
+                        </label>
+                                }
+
+                            }
+                        }
+                    </div>
+                    <div class="col-sm-4">
+                        <span class="help-block form-control-static"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label"><span class="f_req"></span>排序码：</label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" value="@Model.sortcode" name="sortcode">
+                    </div>
+                    <div class="col-sm-4">
+                        <span class="help-block form-control-static"></span>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $("#btnsave").click(function () {
+        $("#form1").validate({
+            rules: {
+                menuname: {
+                    required: true
+                },
+                menucode: {
+                    required: true
+                },
+                blockid: {
+                    required: true
+                },
+                menuhref: {
+                    required: true
+                }
+            },
+
+            messages: {
+                menuname: {
+                    required: "模块名称不能为空."
+                },
+                menucode: {
+                    required: "排序码不能为空."
+                },
+                blockid: {
+                    required: "所属模块不能为空."
+                },
+                menuhref: {
+                    required: "资源地址不能为空."
+                }
+            },
+            errorClass: "error",
+            success: 'valid',
+            unhighlight: function (element, errorClass, validClass) { //验证通过
+                $(element).tooltip('destroy').removeClass(errorClass);
+            },
+            errorPlacement: function (error, element) {
+                if ($(element).next("div").hasClass("tooltip")) {
+                    $(element).attr("data-placement", "right");
+                    $(element).attr("data-original-title", $(error).text()).tooltip("show");
+                } else {
+                    $(element).attr("title", $(error).text()).tooltip("show");
+                }
+            },
+            submitHandler: function () {
+                $("#btnsave").button('loading');
+                $("form:first").ajaxSubmit(function (result) {
+                    if (result.state == 0) {
+                        alert(result.msg);
+                        $("#btnsave").button('reset');
+                        window.location.href = "@Url.Action("Index")";
+                    } else { alert(result.msg); $("#btnsave").button('reset'); }
+                });
+            }
+        });
+
+        $("form:first").submit();
+
+    });
+</script>

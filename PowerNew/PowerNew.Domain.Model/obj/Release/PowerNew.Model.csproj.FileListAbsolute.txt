@@ -1,0 +1,10 @@
+G:\BJF文件集合\单元测试\PowerNew\PowerNew.Domain.Model\bin\Release\PowerNew.Domain.Model.dll.config
+G:\BJF文件集合\单元测试\PowerNew\PowerNew.Domain.Model\bin\Release\PowerNew.Domain.Model.dll
+G:\BJF文件集合\单元测试\PowerNew\PowerNew.Domain.Model\bin\Release\PowerNew.Domain.Model.pdb
+G:\BJF文件集合\单元测试\PowerNew\PowerNew.Domain.Model\bin\Release\EntityFramework.dll
+G:\BJF文件集合\单元测试\PowerNew\PowerNew.Domain.Model\bin\Release\Newtonsoft.Json.dll
+G:\BJF文件集合\单元测试\PowerNew\PowerNew.Domain.Model\bin\Release\EntityFramework.xml
+G:\BJF文件集合\单元测试\PowerNew\PowerNew.Domain.Model\bin\Release\Newtonsoft.Json.xml
+G:\BJF文件集合\单元测试\PowerNew\PowerNew.Domain.Model\bin\Release\zh-Hans\EntityFramework.resources.dll
+G:\BJF文件集合\单元测试\PowerNew\PowerNew.Domain.Model\obj\Release\PowerNew.Domain.Model.dll
+G:\BJF文件集合\单元测试\PowerNew\PowerNew.Domain.Model\obj\Release\PowerNew.Domain.Model.pdb

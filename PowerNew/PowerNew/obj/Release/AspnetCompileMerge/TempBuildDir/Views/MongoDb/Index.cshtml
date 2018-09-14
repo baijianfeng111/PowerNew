@@ -1,0 +1,85 @@
+﻿@model PowerNew.Common.PagerResult<PowerNew.Domain.Model.bjf_menu>
+@{
+    ViewBag.Title = "Index";
+    var index = Model.Index;
+    var param = ViewBag.param;
+}
+<div class="" style="width:100%;margin:0 auto">
+    <div class="row">
+        <div class="form-group">
+            <div><h3 class="col-sm-8" style="margin-top: 5px;"><i class="glyphicon glyphicon-tag"></i>菜单管理</h3></div>
+            <div class="form-group" style="margin-top: 10px;">
+                <a class="btn btn-info" href="@Url.Action("Index")"><i class="glyphicon glyphicon-refresh"></i>刷新</a>
+                <a class="btn btn-info" href="@Url.Action("Create")"><i class="glyphicon glyphicon-plus"></i>添加</a>
+            </div>
+            <hr>
+        </div>
+    </div>
+    <div class="row">
+        <form id="formQuery" method="get" action="@Url.Action("Index")">
+            <div class="form-group col-sm-4">
+                <label class="col-sm-3 control-label" style="line-height: 43px">菜单名称：</label>
+                <div class="col-sm-5">
+                    <input type="text" class="form-control" value="@param.blockname" name="blockname">
+                </div>
+            </div>
+            <button class="btn btn-success" type="submit"><i class="glyphicon glyphicon-search"></i>查询</button>
+            <button class="btn btn-warning" type="button" id="btnclear"><i class="glyphicon glyphicon-trash"></i>清空</button>
+        </form>
+    </div>
+    <table id="table-area" class="table table-bordered table-striped table-hover" style="margin-top:10px;">
+        <tr>
+            <th>序号</th>
+            <th>菜单名称</th>
+            <th>目标地址</th>
+            <th>是否是菜单组</th>
+            <th>是否启用</th>
+            <th>最后更新时间</th>
+            <th>操作</th>
+        </tr>
+        @foreach (PowerNew.Domain.Model.bjf_menu item in Model.DataList)
+        {
+            index++;
+            <tr>
+                <td>@index</td>
+                <td>@item.menuname</td>
+                <td>@item.menuhref</td>
+                <td>@(item.isgroup == 1 ? "是" : "否")</td>
+                <td>@(item.isuse == true ? "是" : "否")</td>
+                <td>@item.updatetime</td>
+                <td>
+                    <a class="btn btn-link btn-xs" href="@Url.Action("Edit", new {id = item.id})">修改</a><a class="btn btn-link btn-xs" onclick="IsDelete(@item.id)">删除</a>
+
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+<div style="width:40%;float:right">
+    @Html.Raw(Model.PagerHtml()) 共 @Model.Total 条
+</div>
+<script type="text/javascript">
+
+    function IsDelete(id) {
+        if (!confirm("是否要删除该条信息？")) {
+            return;
+        }
+        var url = "@Url.Action("Delete")";
+        $.post(url, { id: id }, function (result) {
+            if (result.state == 0) {
+                alert(result.msg);
+                window.location.href = "@Url.Action("Index")";
+            } else {
+                alert(result.msg);
+            }
+        });
+    }
+
+    $(function () {
+        $("#btnclear").click(function () {
+            $("#formQuery :input").each(function () {
+                $(this).val("");
+            });
+        });
+    });
+</script>

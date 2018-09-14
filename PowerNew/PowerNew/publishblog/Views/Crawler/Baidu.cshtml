@@ -1,0 +1,96 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>下载网页内容</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Content/js/jquery.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="form-group" style="margin-top: 10%">
+                <label class="control-label col-sm-2">请输入地址：</label>
+                <div class="col-sm-6">
+                    <input type="text" id="url" value="" class="form-control" />
+                </div>
+
+                <a class="btn btn-warning" onclick="doPrint()">下载</a>
+                <a class="btn btn-warning" onclick="deleteurl()">删除</a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group" style="margin-top: 10%">
+                <label class="control-label col-sm-2">跨域请求接口实例：</label>
+                <a class="btn btn-warning" onclick="ClickjsonP()">点击请求</a>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+
+
+        function ClickjsonP() {
+            var ismember = 1;
+            var name = "aaron";
+            var mobile = "15919869987";
+            var city = "北京";
+            var centername = "大钟寺";
+            var urlMsg = "http://wx01.sc2005.cn";
+            $.ajax({
+                type: "GET",
+                url: urlMsg + "/api/LinshiMember/GetAddLinshiMember1?name=" + name + "&mobile=" + mobile + "&city=" + city + "&centername=" + centername + "&ismember=" + ismember + "&jsonpcallback=?",
+                dataType: "jsonp",
+                jsonp: "jsonpcallback",
+                jsonpCallback: "flightHandler",
+                success: function (result) {
+                    alert(result.Msg);
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert("status=" + XMLHttpRequest.status + " readyState="
+                        + XMLHttpRequest.readyState + " textStatus=" + textStatus);
+                }
+            });
+        }
+
+        function flightHandler(data) {
+            alert(data.State);
+        }
+
+        function deleteurl() {
+            var url = "@Url.Action("DeleteFile")";
+            $.post(url,
+                function (result) {
+                    if (result.state == 0) {
+                        alert(result.msg);
+                    } else {
+                        alert(result.msg);
+                    }
+                });
+        }
+
+        function doPrint() {
+            var httpurl = $("#url").val();
+            if (httpurl == "") {
+                alert("地址不能为空.");
+                return;
+            }
+            var url = "@Url.Action("DownLoadPdf")";
+            $.post(url,
+                { httpurl: httpurl },
+                function (result) {
+                    if (result.state == 0) {
+                        alert(result.msg);
+                    } else {
+                        alert(result.msg);
+                    }
+                });
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,74 @@
+﻿<style>
+    .shakeimage {
+        position: relative;
+        left: 100px;
+    }
+
+    #fot {
+        color: #808181;
+    }
+
+        #fot a {
+            cursor: pointer;
+            color: #808181;
+            border-radius: 20px 20px 20px 20px;
+        }
+
+            #fot a:hover {
+                background: none;
+                color: white;
+                text-decoration-color: white;
+                text-decoration-line: underline;
+            }
+</style>
+<footer class="blog-footer" style="margin-top: 100px;">
+    <div class="am-g" style="background-color: #444546;">
+        <div class="am-u-md-8 am-input-group" id="fot">
+
+            <div class="am-u-md-4">
+                <ul class="am-nav">
+                    <li class="am-nav-header"><a>前端网站</a></li>
+                    <li><a href="http://www.bootcss.com/" target="_blank">Bootstrap</a></li>
+                    <li><a href="http://amazeui.org/" target="_blank">Amaze UI</a></li>
+                    <li><a href="http://www.angularjs.net.cn/" target="_blank">Angular.js</a></li>
+                </ul>
+            </div>
+            <div class="am-u-md-4">
+                <ul class="am-nav">
+                    <li class="am-nav-header"><a>技术网站</a></li>
+                    <li><a href="http://www.runoob.com" target="_blank">菜鸟联盟</a></li>
+                    <li><a href="http://www.shouce.ren/" target="_blank">手册网</a></li>
+                    <li><a href="https://www.cnblogs.com/" target="_blank">博客园</a></li>
+                </ul>
+            </div>
+            <div class="am-u-md-4">
+                <ul class="am-nav">
+                    <li class="am-nav-header"><a>问题交流</a></li>
+                    <li><span class="am-icon-qq" style="cursor: pointer;">QQ：806078508</span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="am-u-md-2">
+            <div style="margin-top: 30px;">
+                <img style="border-radius: 20px 20px 20px 20px;" src="~/Image/Wechat.png" width="100" height="100" title="记得关注我哦" class="shakeimage" onmouseover="shake(this,'onmouseout')" />
+            </div>
+        </div>
+        <div class="am-u-md-2">
+        </div>
+    </div>
+    <p style="background-color: white; height: 50px; margin-bottom:auto">
+        <a style="color: gray;" href="@Url.Action("Index", "Blog")">Aaron‘s Blog</a><br />
+        <small><a style="color: gray" href="@Url.Action("Index", "Blog")">© 2016 Aaron‘s Blog · Designed by Aaron</a></small>
+    </p>
+</footer>
+<script type="text/javascript">
+    var typ = ["marginTop", "marginLeft"], rangeN = 5, timeout = 5;
+
+    function shake(o, end) {
+        var range = Math.floor(Math.random() * rangeN);
+        var typN = Math.floor(Math.random() * typ.length);
+        o["style"][typ[typN]] = "" + range + "px";
+        var shakeTimer = setTimeout(function () { shake(o, end) }, timeout);
+        o[end] = function () { clearTimeout(shakeTimer) };
+    }
+</script>

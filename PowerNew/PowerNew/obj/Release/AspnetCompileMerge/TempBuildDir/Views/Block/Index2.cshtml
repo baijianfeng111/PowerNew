@@ -1,0 +1,103 @@
+﻿@model PowerNew.Bll.QueryBlock
+@{
+    ViewBag.Title = "Index";
+}
+<div class="" style="width:100%;margin:0 auto">
+    <div class="form-group">
+        <div><h3 class="col-sm-8" style="margin-top: 5px;"><i class="glyphicon glyphicon-tag"></i>模块管理</h3></div>
+        <div class="form-group" style="margin-top: 10px;">
+            <a class="btn btn-info" href="@Url.Action("Index")"><i class="glyphicon glyphicon-refresh"></i>刷新</a>
+            <a class="btn btn-info" href="@Url.Action("Create")"><i class="glyphicon glyphicon-plus"></i>添加</a>
+        </div>
+        <hr>
+    </div>
+    <form id="formQuery" method="get" action="@Url.Action("Index")">
+        <div class="form-group">
+            <label class="col-sm-1 control-label" style="line-height: 43px">模块名称：</label>
+            <div class="col-sm-2">
+                <input type="text" class="form-control" value="@Model.blockname" name="blockname">
+            </div>
+        </div>
+        <button class="btn btn-success" type="submit"><i class="glyphicon glyphicon-search"></i>查询</button>
+        <button class="btn btn-warning" type="button" id="btnclear"><i class="glyphicon glyphicon-trash"></i>清空</button>
+    </form>
+
+    <table id="table-area" class="table table-bordered table-striped table-hover" style="margin-top: 10px;">
+        <thead>
+            <tr>
+                <th>序号</th>
+                <th>模块名称</th>
+                <th>是否启用</th>
+                <th>排序码</th>
+                <th>最后更新时间</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody id="thisbody"></tbody>
+    </table>
+</div>
+<div style="width:40%;float:right" id="page">
+</div>
+<script type="text/javascript">
+
+    function IsDelete(id) {
+        if (!confirm("是否要删除该条信息？")) {
+            return;
+        }
+        var url = "@Url.Action("Delete")";
+        $.post(url, { id: id }, function (result) {
+            if (result.state == 0) {
+                alert(result.msg);
+                window.location.href = "@Url.Action("Index")";
+            } else {
+                alert(result.msg);
+            }
+        });
+    }
+
+    $(function () {
+        //首次加载
+        LoadPage(1);
+        //清空
+        $("#btnclear").click(function () {
+            $("#formQuery :input").each(function () {
+                $(this).val("");
+            });
+        });
+    });
+
+
+    function LoadPage(pageindex) {
+        //清空列表和分页信息
+        $("#thisbody").empty();
+        $("#page").empty();
+
+        var url = "@Url.Action("PageList")";
+        var data = new Object();
+        data = $("#formQuery").serialize();
+        $.post(url, { data: data, PageIndex: pageindex }, function (result) {
+            if (result.data != null) {
+                $.each(result.data,
+                    function (index, value) {
+                        //填充列表
+                        $("#thisbody").append(' <tr>\
+                                <td>' + (result.index + index + 1) + '</td>\
+                                <td>' + value.blockname + '</td>\
+                                <td>' + parseInt(value.isuse) + '</td>\
+                                <td>'+ value.sortcode + '</td>\
+                                <td>'+ value.updatetime + '</td>\
+                                <td><a class="btn btn-link btn-xs" href="@Url.Action("Edit")?id='+ value.id + '">修改</a><a class="btn btn-link btn-xs" onclick="IsDelete(' + value.id + ')">删除</a></td></tr>');
+                    });
+
+                //分页信息
+                $("#page").html(result.pagehtml);
+
+                //分页点击事件
+                $("#page a").click(function () {
+                    LoadPage($(this).attr('PageIndex'));
+                });
+            }
+        });
+    }
+
+</script>
